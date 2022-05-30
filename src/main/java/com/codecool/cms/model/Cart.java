@@ -9,8 +9,8 @@ public class Cart {
     // Field(s)
     UUID id;
     UUID userId;
-    Map<UUID, Integer> products;
-    List<UUID> reservations;
+    Map<Product, Integer> products;
+    List<Reservation> reservations;
 
     // Constructor(s)
     public Cart(UUID id, UUID userId) {
@@ -35,20 +35,20 @@ public class Cart {
         this.userId = userId;
     }
 
-    public Map<UUID, Integer> getProducts() {
+    public Map<Product, Integer> getProducts() {
         return products;
     }
 
-    public void setProducts(Map<UUID, Integer> products) {
+    public void setProducts(Map<Product, Integer> products) {
         this.products = products;
     }
 
-    public List<UUID> getReservations() {
+    public List<Reservation> getReservations() {
         return reservations;
     }
 
-    public void setReservations(List<UUID> reservations) {
+    public void setReservations(List<Reservation> reservations) {
         this.reservations = reservations;
     }
-
+    
 }
