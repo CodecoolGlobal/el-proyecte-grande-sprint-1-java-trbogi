@@ -5,5 +5,5 @@ public enum UserRole {
     ADMIN,
     MEMBER,
     COACH
-    
+
 }
