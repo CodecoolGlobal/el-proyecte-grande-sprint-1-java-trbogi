@@ -2,7 +2,7 @@ package com.codecool.cms.model;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 public class Reservation {
@@ -11,9 +11,9 @@ public class Reservation {
     private LocalDateTime start;
     private LocalDateTime end;
     private int participantLimit;
-    private UUID coachId;
+    private User coach;
     private BigDecimal price;
-    private List<User> participants;
+    private Map<User, Boolean> participants;
 
     public Reservation(UUID id, int courtNumber, LocalDateTime start, LocalDateTime end, int participantLimit, BigDecimal price) {
         this.id = id;
@@ -24,11 +24,11 @@ public class Reservation {
         this.price = price;
     }
 
-    public List<User> getParticipants() {
+    public Map<User, Boolean> getParticipants() {
         return participants;
     }
 
-    public void setParticipants(List<User> participants) {
+    public void setParticipants(Map<User, Boolean> participants) {
         this.participants = participants;
     }
 
@@ -68,12 +68,12 @@ public class Reservation {
         this.participantLimit = participantLimit;
     }
 
-    public UUID getCoachId() {
-        return coachId;
+    public User getCoach() {
+        return coach;
     }
 
-    public void setCoachId(UUID coachId) {
-        this.coachId = coachId;
+    public void setCoach(User coach) {
+        this.coach = coach;
     }
 
     public BigDecimal getPrice() {
