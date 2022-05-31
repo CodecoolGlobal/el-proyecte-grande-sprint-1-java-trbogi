@@ -1,6 +1,6 @@
 package com.codecool.cms.controller;
 
-import org.springframework.http.ResponseEntity;
+import com.codecool.cms.dto.CartDto;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
