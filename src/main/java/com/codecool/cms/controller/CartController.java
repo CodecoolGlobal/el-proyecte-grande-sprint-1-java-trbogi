@@ -1,6 +1,7 @@
 package com.codecool.cms.controller;
 
 import com.codecool.cms.dto.CartDto;
+import com.codecool.cms.dto.ReservationDto;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
