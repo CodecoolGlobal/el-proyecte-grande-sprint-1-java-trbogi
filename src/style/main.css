@@ -5,8 +5,9 @@ body{
 }
 
 .container {
-    display: flex; /* or inline-flex */
+    display: flex;
     flex-direction: row;
+    justify-content: center;
 }
 
 table{
@@ -19,31 +20,62 @@ table{
 }
 
 td{
-    padding: 0.8rem 1.2rem;
+    padding: 0.6rem 1.2rem;
     border: 1px solid rgba(188, 228, 246, 0.31);
     border-radius: 1%;
     background-color: aliceblue;
 
 }
 
-td span{
-    background-color: #61dafb;
-    padding: 10% 50%;
-
+.days{
+    display: flex;
+    flex-direction: row;
+    width: 65%;
+    background-color: rgba(188,228,246,0.58);
+    border: 1px solid rgba(188, 228, 246, 0.31);
+    border-radius: 0.2%;
+    margin: 2%;
+    padding: 2%;
 }
 
-#slots{
-    padding-top: 15%;
-    width: 20%;
+.slots{
+    display: flex;
+    flex-direction: column;
+    padding-top: 12%;
+    width: 14.2%;
 }
 
-#slots ul{
+.slots ul{
     list-style-type: none;
+    padding-left: 0;
+    padding-right: 0;
 }
-#slots li{
+
+.slots li{
     color: #282c34 ;
     background-color: aliceblue;
-    padding: 5%;
+    padding: 4%;
     margin: 3%;
     border-radius: 1%;
+    width: 60%;
+}
+.slots .day-number{
+    background-color: #feb934;
+    font-size: 1.4rem;
+    font-weight: bold;
+}
+
+.slots .day-text{
+    background-color: #fede95;
+    font-weight: bold;
+}
+
+.slots p{
+    color: #282c34 ;
+    background-color: aliceblue;
+    padding: 5% 4%;
+    margin: 1.5% 3%;
+    border-radius: 2%;
+    width: 90%;
+    text-align: center;
 }
