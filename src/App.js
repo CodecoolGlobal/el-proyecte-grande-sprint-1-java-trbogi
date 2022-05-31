@@ -2,7 +2,8 @@ import './App.css';
 import Moment from 'react-moment';
 import moment from 'moment';
 import Days from './components/Days.js'
-import {useState, useEffect} from "react";
+import {useState} from "react";
+import './style/main.css'
 
 function App() {
     const startOfWeek = moment().startOf('isoweek');
@@ -25,7 +26,20 @@ function App() {
 
 
   return (
-    <div className="App">
+    <div className="container" >
+        <div id="slots">
+            <ul>
+                <li>06:00 - 08:00</li>
+                <li>08:00 - 10:00</li>
+                <li>10:00 - 12:00</li>
+                <li>12:00 - 14:00</li>
+                <li>14:00 - 16:00</li>
+                <li>16:00 - 18:00</li>
+                <li>18:00 - 20:00</li>
+                <li>20:00 - 22:00</li>
+            </ul>
+        </div>
+        <button onClick={() => {turnPage(-1)}}>Previous</button>
       <table>
           <tbody>
           <tr>
@@ -34,10 +48,90 @@ function App() {
               </th>
           </tr>
               <Days days={days}></Days>
+          <tr>
+              <td>1</td>
+              <td>1</td>
+              <td>1</td>
+              <td>1</td>
+              <td>1</td>
+              <td>1</td>
+              <td>1</td>
+          </tr>
+          <tr>
+              <td>2</td>
+              <td>1</td>
+              <td>1</td>
+              <td>1</td>
+              <td>1</td>
+              <td>1</td>
+              <td>1</td>
+          </tr>
+          <tr>
+              <td>3</td>
+              <td>1</td>
+              <td>1</td>
+              <td>1</td>
+              <td>1</td>
+              <td>1</td>
+              <td>1</td>
+          </tr>
+          <tr>
+              <td>4</td>
+              <td>1</td>
+              <td>1</td>
+              <td>1</td>
+              <td>1</td>
+              <td>1</td>
+              <td>1</td>
+          </tr>
+          <tr>
+              <td>5</td>
+              <td>1</td>
+              <td>1</td>
+              <td>1</td>
+              <td>1</td>
+              <td>1</td>
+              <td>1</td>
+          </tr>
+          <tr>
+              <td>5</td>
+              <td>1</td>
+              <td>1</td>
+              <td>1</td>
+              <td>1</td>
+              <td>1</td>
+              <td>1</td>
+          </tr>
+          <tr>
+              <td>6</td>
+              <td>1</td>
+              <td>1</td>
+              <td>1</td>
+              <td>1</td>
+              <td>1</td>
+              <td>1</td>
+          </tr>
+          <tr>
+              <td>7</td>
+              <td>1</td>
+              <td>1</td>
+              <td>1</td>
+              <td>1</td>
+              <td>1</td>
+              <td>1</td>
+          </tr>
+          <tr>
+              <td>8</td>
+              <td>1</td>
+              <td>1</td>
+              <td>1</td>
+              <td>1</td>
+              <td>1</td>
+              <td>1</td>
+          </tr>
 
           </tbody>
       </table>
-        <button onClick={() => {turnPage(-1)}}>Previous</button>
         <button onClick={() => {turnPage(1)}}>Next</button>
     </div>
   );
