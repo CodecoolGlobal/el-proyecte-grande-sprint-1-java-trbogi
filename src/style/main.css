@@ -1,0 +1,49 @@
+body{
+    background-color: rgba(28,162,184);
+    color: azure;
+    font-family: 'Nunito Sans', sans-serif;
+}
+
+.container {
+    display: flex; /* or inline-flex */
+    flex-direction: row;
+}
+
+table{
+    color: #282c34;
+    background-color: rgba(188,228,246,0.58);
+    border: 1px solid rgba(188, 228, 246, 0.31);
+    border-radius: 0.2%;
+    margin: 2%;
+    padding: 2%;
+}
+
+td{
+    padding: 0.8rem 1.2rem;
+    border: 1px solid rgba(188, 228, 246, 0.31);
+    border-radius: 1%;
+    background-color: aliceblue;
+
+}
+
+td span{
+    background-color: #61dafb;
+    padding: 10% 50%;
+
+}
+
+#slots{
+    padding-top: 15%;
+    width: 20%;
+}
+
+#slots ul{
+    list-style-type: none;
+}
+#slots li{
+    color: #282c34 ;
+    background-color: aliceblue;
+    padding: 5%;
+    margin: 3%;
+    border-radius: 1%;
+}
