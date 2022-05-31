@@ -16,9 +16,9 @@ function App() {
     const [days, setDays] = useState([monday, tuesday, wednesday, thursday, friday, saturday, sunday]);
 
 
-    const nextPage = () => {
+    const turnPage = (amount) => {
         for (let i = 0; i < days.length; i++) {
-            days[i] = days[i].clone().add(1, 'week')
+            days[i] = days[i].clone().add(amount, 'week')
         }
         setDays([...days])
     }
@@ -37,7 +37,8 @@ function App() {
 
           </tbody>
       </table>
-        <button onClick={nextPage}>Next</button>
+        <button onClick={() => {turnPage(-1)}}>Previous</button>
+        <button onClick={() => {turnPage(1)}}>Next</button>
     </div>
   );
 }
