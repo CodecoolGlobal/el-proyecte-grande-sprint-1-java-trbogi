@@ -4,6 +4,8 @@ import moment from 'moment';
 import Days from './components/Days.js'
 import {useState} from "react";
 import './style/main.css'
+import {FaAngleRight} from "react-icons/fa"
+import {FaAngleLeft} from "react-icons/fa"
 
 function App() {
     const startOfWeek = moment().startOf('isoweek');
@@ -27,7 +29,7 @@ function App() {
 
   return (
     <div className="container" >
-        <div id="slots">
+        <div className="slots">
             <ul>
                 <li>06:00 - 08:00</li>
                 <li>08:00 - 10:00</li>
@@ -39,100 +41,9 @@ function App() {
                 <li>20:00 - 22:00</li>
             </ul>
         </div>
-        <button onClick={() => {turnPage(-1)}}>Previous</button>
-      <table>
-          <tbody>
-          <tr>
-              <th>
-                  <Moment format={"MMM"}>{days[0]}</Moment>
-              </th>
-          </tr>
-              <Days days={days}></Days>
-          <tr>
-              <td>1</td>
-              <td>1</td>
-              <td>1</td>
-              <td>1</td>
-              <td>1</td>
-              <td>1</td>
-              <td>1</td>
-          </tr>
-          <tr>
-              <td>2</td>
-              <td>1</td>
-              <td>1</td>
-              <td>1</td>
-              <td>1</td>
-              <td>1</td>
-              <td>1</td>
-          </tr>
-          <tr>
-              <td>3</td>
-              <td>1</td>
-              <td>1</td>
-              <td>1</td>
-              <td>1</td>
-              <td>1</td>
-              <td>1</td>
-          </tr>
-          <tr>
-              <td>4</td>
-              <td>1</td>
-              <td>1</td>
-              <td>1</td>
-              <td>1</td>
-              <td>1</td>
-              <td>1</td>
-          </tr>
-          <tr>
-              <td>5</td>
-              <td>1</td>
-              <td>1</td>
-              <td>1</td>
-              <td>1</td>
-              <td>1</td>
-              <td>1</td>
-          </tr>
-          <tr>
-              <td>5</td>
-              <td>1</td>
-              <td>1</td>
-              <td>1</td>
-              <td>1</td>
-              <td>1</td>
-              <td>1</td>
-          </tr>
-          <tr>
-              <td>6</td>
-              <td>1</td>
-              <td>1</td>
-              <td>1</td>
-              <td>1</td>
-              <td>1</td>
-              <td>1</td>
-          </tr>
-          <tr>
-              <td>7</td>
-              <td>1</td>
-              <td>1</td>
-              <td>1</td>
-              <td>1</td>
-              <td>1</td>
-              <td>1</td>
-          </tr>
-          <tr>
-              <td>8</td>
-              <td>1</td>
-              <td>1</td>
-              <td>1</td>
-              <td>1</td>
-              <td>1</td>
-              <td>1</td>
-          </tr>
-
-          </tbody>
-      </table>
-        <button onClick={() => {turnPage(1)}}>Next</button>
+        <FaAngleLeft onClick={() => {turnPage(-1)}}></FaAngleLeft>
+        <Days days={days}></Days>
+        <FaAngleRight onClick={() => {turnPage(1)}}></FaAngleRight>
     </div>
   );
 }
