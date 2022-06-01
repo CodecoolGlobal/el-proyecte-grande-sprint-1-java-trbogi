@@ -4,12 +4,15 @@ import java.math.BigDecimal;
 import java.util.UUID;
 
 public class Product {
+
+    // Field(s)
     private UUID id;
     private String name;
     private String description;
     private BigDecimal price;
     private ProductCategory productCategory;
 
+    // Constructor(s)
     public Product(UUID id, String name, String description, BigDecimal price, ProductCategory productCategory) {
         this.id = id;
         this.name = name;
@@ -18,6 +21,7 @@ public class Product {
         this.productCategory = productCategory;
     }
 
+    // Getter(s), Setter(s)
     public UUID getId() {
         return id;
     }
@@ -57,4 +61,5 @@ public class Product {
     public void setProductCategory(ProductCategory productCategory) {
         this.productCategory = productCategory;
     }
+
 }

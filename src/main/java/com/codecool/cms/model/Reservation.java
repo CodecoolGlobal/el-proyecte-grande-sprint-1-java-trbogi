@@ -6,6 +6,8 @@ import java.util.Map;
 import java.util.UUID;
 
 public class Reservation {
+
+    // Field(s)
     private final UUID id;
     private int courtNumber;
     private LocalDateTime start;
@@ -15,6 +17,7 @@ public class Reservation {
     private BigDecimal price;
     private Map<User, Boolean> participants;
 
+    // Constructor(s)
     public Reservation(UUID id, int courtNumber, LocalDateTime start, LocalDateTime end, int participantLimit, BigDecimal price) {
         this.id = id;
         this.courtNumber = courtNumber;
@@ -24,6 +27,7 @@ public class Reservation {
         this.price = price;
     }
 
+    // Getter(s), Setter(s)
     public Map<User, Boolean> getParticipants() {
         return participants;
     }
@@ -83,4 +87,5 @@ public class Reservation {
     public void setPrice(BigDecimal price) {
         this.price = price;
     }
+
 }
