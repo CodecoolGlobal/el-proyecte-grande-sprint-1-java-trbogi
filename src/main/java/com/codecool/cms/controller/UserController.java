@@ -23,4 +23,11 @@ public class UserController {
     @PatchMapping("patch/{userID}")
     public void ModifyUserByUserId(@PathVariable String userID, @RequestBody UserDto modifiedUserData) {
     }
+
+    // Get address of user
+    @GetMapping("get/address/{userID}")
+    public UserDto getUserAddressByUserId(@PathVariable String userID) {
+        return null;
+    }
+
 }
