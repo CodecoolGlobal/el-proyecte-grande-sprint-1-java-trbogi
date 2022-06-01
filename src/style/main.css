@@ -8,64 +8,50 @@ body{
     display: flex;
     flex-direction: row;
     justify-content: center;
+    align-items: center;
+    width: 100%;
 }
 
-table{
-    color: #282c34;
+
+.timetable-container-with-arrows{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
     background-color: rgba(188,228,246,0.58);
     border: 1px solid rgba(188, 228, 246, 0.31);
-    border-radius: 0.2%;
-    margin: 2%;
-    padding: 2%;
+    border-radius: 0.3%;
+    padding: 1%;
+    width: 80vw;
 }
 
-td{
-    padding: 0.6rem 1.2rem;
-    border: 1px solid rgba(188, 228, 246, 0.31);
-    border-radius: 1%;
-    background-color: aliceblue;
-
+.timetable{
+    padding-bottom: 2%;
+    width: 100%;
 }
 
 .days{
     display: flex;
     flex-direction: row;
-    width: 65%;
-    background-color: rgba(188,228,246,0.58);
-    border: 1px solid rgba(188, 228, 246, 0.31);
-    border-radius: 0.2%;
-    margin: 2%;
-    padding: 2%;
+    justify-content: space-between;
 }
 
 .slots{
     display: flex;
     flex-direction: column;
-    padding-top: 12%;
-    width: 14.2%;
+    justify-content: center;
+    padding-top: 1%;
+    width: 100%;
 }
 
-.slots ul{
-    list-style-type: none;
-    padding-left: 0;
-    padding-right: 0;
-}
-
-.slots li{
-    color: #282c34 ;
-    background-color: aliceblue;
-    padding: 4%;
-    margin: 3%;
-    border-radius: 1%;
-    width: 60%;
-}
 .slots .day-number{
     background-color: #feb934;
+    height: 1.8rem;
     font-size: 1.4rem;
     font-weight: bold;
 }
 
 .slots .day-text{
+    height: 1.4rem;
     background-color: #fede95;
     font-weight: bold;
 }
@@ -73,9 +59,42 @@ td{
 .slots p{
     color: #282c34 ;
     background-color: aliceblue;
-    padding: 5% 4%;
-    margin: 1.5% 3%;
+    padding: 4px 4%;
+    margin: 1.5px;
     border-radius: 2%;
-    width: 90%;
+    height: 40px;
     text-align: center;
+}
+
+.courts{
+    display: flex;
+    justify-content: space-between;
+}
+.courts span{
+    font-weight: 900;
+    padding: 1% 5%;
+    margin-bottom: 1%;
+    margin-top: 1%;
+    border: 2px solid aliceblue;
+    border-radius: 3%;
+}
+
+.left-side{
+    display: flex;
+    flex-direction: column-reverse;
+    margin-right: 1%;
+    margin-bottom: 2% ;
+}
+.times{
+    margin-top: 200%;
+}
+.times p{
+    color: #282c34 ;
+    padding: 3px 4%;
+    margin: 4px 3%;
+    border-radius: 2%;
+    height: 40px;
+    width: 100px;
+    text-align: center;
+    font-weight: bold;
 }
