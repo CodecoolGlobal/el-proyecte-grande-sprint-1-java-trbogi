@@ -2,6 +2,7 @@ package com.codecool.cms.controller;
 
 import com.codecool.cms.dto.NewUserDto;
 import com.codecool.cms.dto.UserDto;
+import com.codecool.cms.model.Address;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -26,7 +27,7 @@ public class UserController {
 
     // Get address of user
     @GetMapping("get/address/{userID}")
-    public UserDto getUserAddressByUserId(@PathVariable String userID) {
+    public Address getUserAddressByUserId(@PathVariable String userID) {
         return null;
     }
 
