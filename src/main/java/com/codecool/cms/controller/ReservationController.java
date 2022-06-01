@@ -1,6 +1,5 @@
 package com.codecool.cms.controller;
 
-import com.codecool.cms.dto.ReservationDto;
 import com.codecool.cms.model.Court;
 import com.codecool.cms.model.Reservation;
 import org.springframework.web.bind.annotation.*;
@@ -14,7 +13,7 @@ public class ReservationController {
 
     // Add new reservation
     @PostMapping("post/new")
-    public void addNewReservation(@RequestBody ReservationDto reservation) {
+    public void addNewReservation(@RequestBody Reservation reservation) {
     }
 
     // Get reservations of the given week by court

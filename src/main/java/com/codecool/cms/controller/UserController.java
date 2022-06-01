@@ -1,8 +1,8 @@
 package com.codecool.cms.controller;
 
 import com.codecool.cms.dto.NewUserDto;
-import com.codecool.cms.dto.UserDto;
 import com.codecool.cms.model.Address;
+import com.codecool.cms.model.User;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -16,13 +16,13 @@ public class UserController {
 
     // Get user data
     @GetMapping("get/{userID}")
-    public UserDto getUserByUserId(@PathVariable String userID) {
+    public User getUserByUserId(@PathVariable String userID) {
         return null;
     }
 
     // Modify user data
     @PatchMapping("patch/{userID}")
-    public void ModifyUserByUserId(@PathVariable String userID, @RequestBody UserDto modifiedUserData) {
+    public void ModifyUserByUserId(@PathVariable String userID, @RequestBody User modifiedUserData) {
     }
 
     // Get address of user

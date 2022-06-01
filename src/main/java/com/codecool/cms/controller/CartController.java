@@ -1,7 +1,7 @@
 package com.codecool.cms.controller;
 
-import com.codecool.cms.dto.CartDto;
-import com.codecool.cms.dto.ReservationDto;
+import com.codecool.cms.model.Cart;
+import com.codecool.cms.model.Reservation;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -10,7 +10,7 @@ public class CartController {
 
     // Get cart content
     @GetMapping("get/{cartId}")
-    public CartDto getCartContentByUserId(@PathVariable String cartId) {
+    public Cart getCartContentByUserId(@PathVariable String cartId) {
         return null;
     }
 
@@ -21,7 +21,7 @@ public class CartController {
 
     // Add reservation (court, practice) to cart
     @PostMapping ("post/reservation/{cartId}/")
-    public String addReservationToCart(@PathVariable String cartId, @RequestBody ReservationDto reservation) {
+    public String addReservationToCart(@PathVariable String cartId, @RequestBody Reservation reservation) {
         String reservationId = "";
         return reservationId;
     }
