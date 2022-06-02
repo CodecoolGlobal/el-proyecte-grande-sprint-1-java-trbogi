@@ -14,13 +14,13 @@ import java.util.List;
 public class ProductController {
 
     // Get product categories
-    @GetMapping("get/categories/")
+    @GetMapping("get-product-categories/")
     public ProductCategory getCartContentByUserId() {
         return null;
     }
 
     // Get products of a category
-    @GetMapping("get/{categoryId}")
+    @GetMapping("get-category/{categoryId}")
     public List<Product> getProductsOfCategory(@PathVariable String categoryId) {
         return null;
     }

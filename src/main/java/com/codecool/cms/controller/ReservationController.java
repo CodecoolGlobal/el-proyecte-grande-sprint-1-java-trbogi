@@ -12,30 +12,30 @@ import java.util.List;
 public class ReservationController {
 
     // Add new reservation
-    @PostMapping("post/new")
+    @PostMapping("add-reservation")
     public void addNewReservation(@RequestBody Reservation reservation) {
     }
 
     // Get reservations of the given week by court
-    @GetMapping("get/{courtNumber}/{firstDayOfWeek}")
+    @GetMapping("get-reservation/{courtNumber}/{firstDayOfWeek}")
     public List<Reservation> getReservationsOfWeekByCourt(@PathVariable Integer courtNumber,
                                                           @PathVariable LocalDateTime firstDayOfWeek) {
         return null;
     }
 
     // Get courts
-    @GetMapping("get/courts/")
+    @GetMapping("get-courts/")
     public List<Court> getCourts() {
         return null;
     }
 
     // Remove coach from reservation
-    @PatchMapping("patch/coach/{reservationId}")
+    @PatchMapping("remove-coach/{reservationId}")
     public void removeCoachFromReservation(@PathVariable String reservationId) {
     }
 
     // Remove participant from practice
-    @PatchMapping("patch/participant/{reservationId}/{userId}")
+    @PatchMapping("remove-participant/{reservationId}/{userId}")
     public void removeParticipantFromReservation(@PathVariable String reservationId, @PathVariable String userId) {
     }
 

@@ -10,23 +10,23 @@ import org.springframework.web.bind.annotation.*;
 public class UserController {
 
     // Create new user
-    @PostMapping("post/new")
+    @PostMapping("create-user")
     public void createUser(@RequestBody NewUserDto newUserData) {
     }
 
     // Get user data
-    @GetMapping("get/{userID}")
+    @GetMapping("get-user/{userID}")
     public User getUserByUserId(@PathVariable String userID) {
         return null;
     }
 
     // Modify user data
-    @PatchMapping("patch/{userID}")
+    @PatchMapping("modify-user/{userID}")
     public void ModifyUserByUserId(@PathVariable String userID, @RequestBody User modifiedUserData) {
     }
 
     // Get address of user
-    @GetMapping("get/address/{userID}")
+    @GetMapping("get-user-address/{userID}")
     public Address getUserAddressByUserId(@PathVariable String userID) {
         return null;
     }
