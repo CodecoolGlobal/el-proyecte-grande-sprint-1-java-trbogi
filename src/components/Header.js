@@ -1,5 +1,5 @@
 import Moment from "react-moment";
-import Days from "./Days";
+import Week from "./Week";
 
 function Header({startOfWeek}) {
     return(

@@ -12,9 +12,7 @@ function App() {
         {'date': '2022-06-15', 'start': '08:00'}]
   return (
     <div className="container" >
-        <div>
-            <TimeTable reservations={reservations}></TimeTable>
-        </div>
+        <TimeTable reservations={reservations}></TimeTable>
     </div>
   );
 }

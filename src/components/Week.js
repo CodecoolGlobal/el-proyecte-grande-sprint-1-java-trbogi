@@ -1,9 +1,9 @@
 import Day from "./Day";
 
-function Days({days, reservations}) {
+function Week({days, reservations}) {
     return (
         <div className="days">
             {days.map((day) =>{return <Day day={day} reservations={reservations}></Day>})}
         </div>
     );
-}export default Days
+}export default Week

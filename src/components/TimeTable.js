@@ -1,5 +1,5 @@
 import Header from "./Header"
-import Days from "./Days"
+import Week from "./Week"
 import {FaAngleLeft, FaAngleRight} from "react-icons/fa";
 import moment from "moment";
 import {useState} from "react";
@@ -37,7 +37,7 @@ function TimeTable({reservations}) {
             <FaAngleLeft size={40} onClick={() => {turnPage(-1)}}></FaAngleLeft>
             <div className="timetable">
                 <Header startOfWeek={days[0]}></Header>
-                <Days days={days} reservations={reservations}></Days>
+                <Week days={days} reservations={reservations}></Week>
             </div>
             <FaAngleRight size={40} onClick={() => {turnPage(1)}}></FaAngleRight>
 
