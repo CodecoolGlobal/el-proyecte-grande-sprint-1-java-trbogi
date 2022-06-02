@@ -4,7 +4,7 @@ import {FaAngleLeft, FaAngleRight} from "react-icons/fa";
 import moment from "moment";
 import {useState} from "react";
 
-function TimeTable() {
+function TimeTable({reservations}) {
     const startOfWeek = moment().startOf('isoweek');
     const monday = startOfWeek;
     const tuesday = startOfWeek.clone().add(1, 'days');
@@ -37,7 +37,7 @@ function TimeTable() {
             <FaAngleLeft size={40} onClick={() => {turnPage(-1)}}></FaAngleLeft>
             <div className="timetable">
                 <Header startOfWeek={days[0]}></Header>
-                <Days days={days}></Days>
+                <Days days={days} reservations={reservations}></Days>
             </div>
             <FaAngleRight size={40} onClick={() => {turnPage(1)}}></FaAngleRight>
 
