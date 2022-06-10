@@ -15,6 +15,9 @@ function TimeTable({reservations}) {
     const sunday = startOfWeek.clone().add(6, 'days');
     const [days, setDays] = useState([monday, tuesday, wednesday, thursday, friday, saturday, sunday]);
 
+    const isCurrentWeek = () => {
+        return days[0].isSame(moment().startOf('isoWeek'));
+    }
 
     const turnPage = (amount) => {
         for (let i = 0; i < days.length; i++) {
@@ -34,7 +37,10 @@ function TimeTable({reservations}) {
                     <p>18:00 - 20:00</p>
                 </div>
             </div>
-            <FaAngleLeft size={40} onClick={() => {turnPage(-1)}}></FaAngleLeft>
+            {isCurrentWeek() && <FaAngleLeft size={40} visibility="hidden" onClick={() => {turnPage(-1)}}></FaAngleLeft>
+            }
+            {!isCurrentWeek() && <FaAngleLeft size={40} onClick={() => {turnPage(-1)}}></FaAngleLeft>
+            }
             <div className="timetable">
                 <Header startOfWeek={days[0]}></Header>
                 <Week days={days} reservations={reservations}></Week>
