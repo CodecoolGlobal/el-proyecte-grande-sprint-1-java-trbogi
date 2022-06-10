@@ -1,4 +1,4 @@
-import {BsCartPlus, BsFillCartCheckFill} from "react-icons/bs";
+import {BsBagPlusFill, BsBagDash} from "react-icons/bs";
 import {useState} from "react";
 
 function TimeSlot({day, start, reservations}) {
@@ -18,13 +18,18 @@ function TimeSlot({day, start, reservations}) {
         setInCart(true);
     }
 
+    const removeReservationFromCart = () => {
+        //TODO: remove reservation from cart in backend
+        setInCart(false);
+    }
+
     if (isReserved()){
         return(<p style={{backgroundColor: "#fcb7b4"}}>{start}</p>)
     }else if(inCart){
-        return (<p style={{backgroundColor: "#c9d6e8"}}>{start} <br/>
-            <BsFillCartCheckFill></BsFillCartCheckFill></p>)
+        return (<p style={{backgroundColor: "#c9d6e8"}} onClick={removeReservationFromCart}>{start} <br/>
+            <BsBagDash></BsBagDash></p>)
     }else{
         return(<p style={{backgroundColor: "aliceblue"}} onClick={addReservationToCart}>{start} <br/>
-            <BsCartPlus></BsCartPlus></p>)
+            <BsBagPlusFill></BsBagPlusFill></p>)
     }
 }export default TimeSlot
