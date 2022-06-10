@@ -14,6 +14,7 @@ function TimeTable({reservations}) {
     const saturday = startOfWeek.clone().add(5, 'days');
     const sunday = startOfWeek.clone().add(6, 'days');
     const [days, setDays] = useState([monday, tuesday, wednesday, thursday, friday, saturday, sunday]);
+    const [directionOfSwipe, setDirectionOfSwipe] = useState("right");
 
     const isCurrentWeek = () => {
         return days[0].isSame(moment().startOf('isoWeek'));
@@ -23,6 +24,7 @@ function TimeTable({reservations}) {
         for (let i = 0; i < days.length; i++) {
             days[i] = days[i].clone().add(amount, 'week')
         }
+        setDirectionOfSwipe(amount === 1 ? "right" :"left");
         setDays([...days])
     }
     return(
@@ -40,7 +42,7 @@ function TimeTable({reservations}) {
             <FaAngleLeft size={40} visibility={isCurrentWeek() ? "hidden":"visible"} onClick={() => {turnPage(-1)}}></FaAngleLeft>
             <div className="timetable">
                 <Header startOfWeek={days[0]}></Header>
-                <Week days={days} reservations={reservations}></Week>
+                <Week directionOfSwipe={directionOfSwipe} days={days} reservations={reservations}></Week>
             </div>
             <FaAngleRight size={40} onClick={() => {turnPage(1)}}></FaAngleRight>
 

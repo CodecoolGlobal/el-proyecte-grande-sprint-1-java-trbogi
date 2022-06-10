@@ -22,6 +22,7 @@ body{
     border-radius: 0.3%;
     padding: 1%;
     width: 80vw;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
 
 .timetable{
@@ -110,4 +111,48 @@ body{
     width: 100px;
     text-align: center;
     font-weight: bold;
+}
+
+.right {
+    animation: 1.5s anim-swipeRight ease-out;
+}
+
+@keyframes anim-swipeRight {
+    0% {
+        opacity: 0;
+        transform: translateX(80%);
+    }
+    20% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+        transform: translateX(0%);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0%);
+    }
+}
+
+.left {
+    animation: 1.5s anim-swipeLeft ease-out;
+}
+
+@keyframes anim-swipeLeft {
+    0% {
+        opacity: 0;
+        transform: translateX(-80%);
+    }
+    20% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+        transform: translateX(0%);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0%);
+    }
 }

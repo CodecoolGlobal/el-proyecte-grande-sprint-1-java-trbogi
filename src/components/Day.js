@@ -2,7 +2,7 @@ import Moment from "react-moment";
 import TimeSlot from "./TimeSlot";
 
 
-function Day({day, reservations}) {
+function Day({day, reservations, directionOfSwipe}) {
     const dayAsString = day.format("YYYY-MM-DD");
     const slots = ['08:00',
         '10:00',
@@ -13,7 +13,7 @@ function Day({day, reservations}) {
 
     return (
         <>
-            <div className="slots">
+            <div className={`slots ${directionOfSwipe}`}>
                     <p className="day-number"><Moment format={"DD"}>{day}</Moment></p>
                     <p className="day-text"><Moment format={"dddd"}>{day}</Moment></p>
                     {slots.map((slot) => {
