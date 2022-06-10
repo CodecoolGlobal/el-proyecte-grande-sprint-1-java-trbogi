@@ -37,10 +37,7 @@ function TimeTable({reservations}) {
                     <p>18:00 - 20:00</p>
                 </div>
             </div>
-            {isCurrentWeek() && <FaAngleLeft size={40} visibility="hidden" onClick={() => {turnPage(-1)}}></FaAngleLeft>
-            }
-            {!isCurrentWeek() && <FaAngleLeft size={40} onClick={() => {turnPage(-1)}}></FaAngleLeft>
-            }
+            <FaAngleLeft size={40} visibility={isCurrentWeek() ? "hidden":"visible"} onClick={() => {turnPage(-1)}}></FaAngleLeft>
             <div className="timetable">
                 <Header startOfWeek={days[0]}></Header>
                 <Week days={days} reservations={reservations}></Week>
