@@ -30,6 +30,6 @@ function TimeSlot({day, start, reservations}) {
             <BsBagDash></BsBagDash></p>)
     }else{
         return(<p style={{backgroundColor: "aliceblue"}} onClick={addReservationToCart}>{start} <br/>
-            <BsBagPlusFill></BsBagPlusFill></p>)
+            <BsBagPlusFill className="addToCartIcon"></BsBagPlusFill></p>)
     }
 }export default TimeSlot
