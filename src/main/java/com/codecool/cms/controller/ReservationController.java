@@ -27,8 +27,8 @@ public class ReservationController {
     // Get reservations of the given week by court
     @GetMapping("get/{courtNumber}/{firstDayOfWeek}")
     public List<Reservation> getReservationsOfWeekByCourt(@PathVariable Integer courtNumber,
-                                                          @PathVariable LocalDateTime firstDayOfWeek) {
-        return null;
+                                                          @PathVariable @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm") LocalDateTime firstDayOfWeek) {
+        return reservationService.getReservationsOfWeekByCourt(courtNumber, firstDayOfWeek);
     }
 
     // Get courts
