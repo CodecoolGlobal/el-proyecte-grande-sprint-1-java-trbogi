@@ -4,7 +4,7 @@ import {FaAngleLeft, FaAngleRight} from "react-icons/fa";
 import moment from "moment";
 import {useState} from "react";
 
-function TimeTable({reservations}) {
+function TimeTable() {
     const startOfWeek = moment().startOf('isoweek');
     const monday = startOfWeek;
     const tuesday = startOfWeek.clone().add(1, 'days');
@@ -15,6 +15,20 @@ function TimeTable({reservations}) {
     const sunday = startOfWeek.clone().add(6, 'days');
     const [days, setDays] = useState([monday, tuesday, wednesday, thursday, friday, saturday, sunday]);
     const [directionOfSwipe, setDirectionOfSwipe] = useState("right");
+    const [reservations, setReservations] = useState([]);
+
+    const getReservations = (courtNumber, startOfWeek) => {
+        fetch(`http://localhost:8080/api/reservation/get/${courtNumber}/${startOfWeek}`, {
+        })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Success:', data);
+                setReservations(data)
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+    }
 
     const isCurrentWeek = () => {
         return days[0].isSame(moment().startOf('isoWeek'));
@@ -25,6 +39,8 @@ function TimeTable({reservations}) {
             days[i] = days[i].clone().add(amount, 'week')
         }
         setDirectionOfSwipe(amount === 1 ? "right" :"left");
+        const startOfNextWeek = days[0].format("yyyy-MM-DD");
+        getReservations(1, startOfNextWeek)
         setDays([...days])
     }
     return(
@@ -41,7 +57,7 @@ function TimeTable({reservations}) {
             </div>
             <FaAngleLeft size={40} visibility={isCurrentWeek() ? "hidden":"visible"} onClick={() => {turnPage(-1)}}></FaAngleLeft>
             <div className="timetable">
-                <Header startOfWeek={days[0]}></Header>
+                <Header directionOfSwipe={directionOfSwipe} yearAndMonth={days[0].format("YYYY. MMMM")}></Header>
                 <Week directionOfSwipe={directionOfSwipe} days={days} reservations={reservations}></Week>
             </div>
             <FaAngleRight size={40} onClick={() => {turnPage(1)}}></FaAngleRight>

@@ -5,7 +5,10 @@ function TimeSlot({day, start, reservations}) {
     const [inCart, setInCart] = useState(false);
     const isReserved = () => {
         for (const reservation of reservations) {
-            if (reservation.date === day && reservation.start === start){
+            const timeData = reservation.startTime.split(" ");
+            const reservationDate = timeData[0];
+            const reservationStart = timeData[1]
+            if (reservationDate === day && reservationStart === start){
                 return true;
             }
         }
