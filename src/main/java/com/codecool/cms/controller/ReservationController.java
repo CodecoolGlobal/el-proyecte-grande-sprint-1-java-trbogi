@@ -2,8 +2,12 @@ package com.codecool.cms.controller;
 
 import com.codecool.cms.model.Court;
 import com.codecool.cms.model.Reservation;
+import com.codecool.cms.service.ReservationService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.Date;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -11,9 +15,13 @@ import java.util.List;
 @RequestMapping("/api/reservation/")
 public class ReservationController {
 
+    @Autowired
+    ReservationService reservationService;
+
     // Add new reservation
     @PostMapping("post/new")
     public void addNewReservation(@RequestBody Reservation reservation) {
+        reservationService.addReservation(reservation);
     }
 
     // Get reservations of the given week by court
