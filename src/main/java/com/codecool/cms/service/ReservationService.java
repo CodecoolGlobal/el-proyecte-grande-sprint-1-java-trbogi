@@ -16,4 +16,9 @@ public class ReservationService {
     public void addReservation(Reservation reservation){
         repository.save(reservation);
     }
+
+    public List<Reservation> getReservationsOfWeekByCourt(int courtNumber, LocalDateTime startOfWeek){
+        LocalDateTime nextMonday = startOfWeek.plusWeeks(1);
+        return repository.findByCourtNumberAndStartTimeBetween(courtNumber, startOfWeek, nextMonday);
+    }
 }
