@@ -1,11 +1,17 @@
 package com.codecool.cms.model;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import java.util.UUID;
 
+@Entity
 public class Address {
 
     // Field(s)
-    private final UUID id;
+    @Id
+    @GeneratedValue
+    private UUID id;
     private int zipCode;
     private String country;
     private String city;
@@ -18,6 +24,10 @@ public class Address {
         this.country = country;
         this.city = city;
         this.addressLine = addressLine;
+    }
+
+    public Address() {
+
     }
 
     // Getter(s), Setter(s)
