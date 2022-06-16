@@ -8,9 +8,11 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.Date;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
+@CrossOrigin(origins = "http://localhost:3000/")
 @RestController
 @RequestMapping("/api/reservation/")
 public class ReservationController {
@@ -26,9 +28,9 @@ public class ReservationController {
 
     // Get reservations of the given week by court
     @GetMapping("get/{courtNumber}/{firstDayOfWeek}")
-    public List<Reservation> getReservationsOfWeekByCourt(@PathVariable Integer courtNumber,
-                                                          @PathVariable @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm") LocalDateTime firstDayOfWeek) {
-        return reservationService.getReservationsOfWeekByCourt(courtNumber, firstDayOfWeek);
+    public List<Reservation> getReservationsOfWeekByCourt(@PathVariable Integer courtNumber, @PathVariable @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate firstDayOfWeek) {
+        LocalDateTime day = firstDayOfWeek.atStartOfDay();
+        return reservationService.getReservationsOfWeekByCourt(courtNumber, day);
     }
 
     // Get courts
