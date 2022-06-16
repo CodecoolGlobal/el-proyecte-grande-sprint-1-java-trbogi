@@ -2,7 +2,7 @@ import {useState} from "react";
 
 function Courts() {
     const courts = ['Court 1', 'Court 2', 'Court 3', 'Court 4']
-    const [selectedCourt, setSelectedCourt] = useState(null);
+    const [selectedCourt, setSelectedCourt] = useState("Court 1");
 
     const selectCourt = (court) => {
         setSelectedCourt(court);
