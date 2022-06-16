@@ -10,6 +10,10 @@ import java.util.List;
 
 @Service
 public class ReservationService {
+    @Value("${com.codecool.volleyball.api_key}")
+    private String API_KEY;
+
+
     @Autowired
     ReservationRepository repository;
 

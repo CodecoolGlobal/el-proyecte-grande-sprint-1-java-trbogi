@@ -34,7 +34,7 @@ public class ReservationController {
     // Get courts
     @GetMapping("get/courts/")
     public List<Court> getCourts() {
-        return null;
+        return List.of();
     }
 
     // Remove coach from reservation
@@ -48,4 +48,3 @@ public class ReservationController {
     }
 
 }
-
