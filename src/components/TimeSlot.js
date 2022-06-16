@@ -1,8 +1,10 @@
 import {BsBagPlusFill, BsBagDash} from "react-icons/bs";
 import {useState} from "react";
+import moment from "moment";
 
 function TimeSlot({day, start, reservations}) {
     const [inCart, setInCart] = useState(false);
+    const isPast = moment(day+ " "+  start).isBefore(moment());
     const isReserved = () => {
         for (const reservation of reservations) {
             const timeData = reservation.startTime.split(" ");
@@ -28,9 +30,11 @@ function TimeSlot({day, start, reservations}) {
 
     if (isReserved()){
         return(<p style={{backgroundColor: "#fcb7b4"}}>{start}</p>)
-    }else if(inCart){
-        return (<p style={{backgroundColor: "#c9d6e8"}} onClick={removeReservationFromCart}>{start} <br/>
+    }else if(inCart) {
+        return (<p style={{backgroundColor: "#CED9FF"}} onClick={removeReservationFromCart}>{start} <br/>
             <BsBagDash></BsBagDash></p>)
+    }else if(isPast){
+            return (<p style={{backgroundColor: "rgb(211, 211, 211, 0.8)"}}></p>)
     }else{
         return(<p style={{backgroundColor: "aliceblue"}} onClick={addReservationToCart}>{start} <br/>
             <BsBagPlusFill className="addToCartIcon"></BsBagPlusFill></p>)
