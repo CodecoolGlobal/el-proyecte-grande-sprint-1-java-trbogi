@@ -1,21 +1,39 @@
 package com.codecool.cms.model;
 
+import javax.persistence.*;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+@Entity
 public class Cart {
 
     // Field(s)
+    @Id
+    @GeneratedValue
     UUID id;
-    UUID userId;
-    Map<Product, Integer> products;
+
+    @OneToOne
+    User user;
+
+
+    @ElementCollection
+    @CollectionTable(name = "cart_content")
+    @Column(name = "quantity")
+    //private Map<Phone, Date> phoneRegister = new HashMap<>();
+    Map<Product, Integer> products = new HashMap<>();
+    @OneToMany
     List<Reservation> reservations;
 
     // Constructor(s)
-    public Cart(UUID id, UUID userId) {
+    public Cart(UUID id, User user) {
         this.id = id;
-        this.userId = userId;
+        this.user = user;
+    }
+
+    public Cart() {
+
     }
 
     // Getter(s), Setter(s)
@@ -27,12 +45,12 @@ public class Cart {
         this.id = id;
     }
 
-    public UUID getUserId() {
-        return userId;
+    public User getUserId() {
+        return user;
     }
 
-    public void setUserId(UUID userId) {
-        this.userId = userId;
+    public void setUserId(User user) {
+        this.user = user;
     }
 
     public Map<Product, Integer> getProducts() {
