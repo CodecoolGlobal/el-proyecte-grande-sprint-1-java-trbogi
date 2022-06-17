@@ -1,15 +1,23 @@
 package com.codecool.cms.model;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import java.math.BigDecimal;
 import java.util.UUID;
 
+@Entity
 public class Product {
 
     // Field(s)
+    @Id
+    @GeneratedValue
     private UUID id;
     private String name;
     private String description;
     private BigDecimal price;
+    @OneToOne
     private ProductCategory productCategory;
 
     // Constructor(s)
@@ -19,6 +27,10 @@ public class Product {
         this.description = description;
         this.price = price;
         this.productCategory = productCategory;
+    }
+
+    public Product() {
+
     }
 
     // Getter(s), Setter(s)
