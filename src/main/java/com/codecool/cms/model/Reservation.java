@@ -1,39 +1,70 @@
 package com.codecool.cms.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.Map;
 import java.util.UUID;
 
+@Entity
 public class Reservation {
 
     // Field(s)
-    private final UUID id;
+    @Id
+    @GeneratedValue
+    private UUID id;
     private int courtNumber;
-    private LocalDateTime start;
-    private LocalDateTime end;
+
+
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
+    @JsonProperty("startTime")
+    private LocalDateTime startTime;
+    @JsonProperty("endTime")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
+    private LocalDateTime endTime;
+    @Column(
+            nullable = true
+    )
     private int participantLimit;
+
+    @OneToOne
     private User coach;
     private BigDecimal price;
-    private Map<User, Boolean> participants;
+
+    /*@ElementCollection
+    @JoinTable(name="participants_payment", joinColumns=@JoinColumn(name="id"))
+    @MapKeyColumn (name="user")
+    @Column(name="payment_status")
+    private Map<User, Boolean> participants;*/
 
     // Constructor(s)
     public Reservation(UUID id, int courtNumber, LocalDateTime start, LocalDateTime end, int participantLimit, BigDecimal price) {
         this.id = id;
         this.courtNumber = courtNumber;
-        this.start = start;
-        this.end = end;
+        this.startTime = start;
+        this.endTime = end;
         this.participantLimit = participantLimit;
         this.price = price;
     }
 
+
+    public Reservation() {
+
+    }
+
     // Getter(s), Setter(s)
-    public Map<User, Boolean> getParticipants() {
+    /*public Map<User, Boolean> getParticipants() {
         return participants;
     }
 
     public void setParticipants(Map<User, Boolean> participants) {
         this.participants = participants;
+    }*/
+
+    public void setId(UUID id){
+        this.id = id;
     }
 
     public UUID getId() {
@@ -48,20 +79,20 @@ public class Reservation {
         this.courtNumber = courtNumber;
     }
 
-    public LocalDateTime getStart() {
-        return start;
+    public LocalDateTime getStartTime() {
+        return startTime;
     }
 
-    public void setStart(LocalDateTime start) {
-        this.start = start;
+    public void setStartTime(LocalDateTime start) {
+        this.startTime = start;
     }
 
-    public LocalDateTime getEnd() {
-        return end;
+    public LocalDateTime getEndTime() {
+        return endTime;
     }
 
-    public void setEnd(LocalDateTime end) {
-        this.end = end;
+    public void setEndTime(LocalDateTime end) {
+        this.endTime = end;
     }
 
     public int getParticipantLimit() {
