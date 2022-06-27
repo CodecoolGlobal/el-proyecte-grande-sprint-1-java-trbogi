@@ -1,32 +1,44 @@
 package com.codecool.cms.model;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import java.nio.file.Path;
 import java.util.UUID;
 
-    public class User {
+@Entity(name = "users")
+public class User {
 
-        // Field(s)
-        private final UUID id;
-        private String name;
-        private String email;
-        private int phone;
-        private String password;
-        private UserRole role;
-        private Path profilePicture;
-        private Address address;
+    // Field(s)
+    @Id
+    @GeneratedValue
+    private UUID id;
+    private String name;
+    private String email;
+    private int phone;
+    private String password;
+    private UserRole role;
+    private String profilePicture;
+    @OneToOne
+    private Address address;
 
         // Constructor(s)
-        public User(UUID id, String name, String email, int phone, String password, UserRole role, Path profilePicture) {
-            this.id = id;
-            this.name = name;
-            this.email = email;
-            this.phone = phone;
-            this.password = password;
-            this.role = role;
-            this.profilePicture = profilePicture;
-        }
+    public User(UUID id, String name, String email, int phone, String password, UserRole role, String profilePicture) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+        this.phone = phone;
+        this.password = password;
+        this.role = role;
+        this.profilePicture = profilePicture;
+    }
 
-        // Getter(s), Setter(s)
+    public User() {
+
+    }
+
+    // Getter(s), Setter(s)
         public UUID getId() {
             return id;
         }
@@ -71,11 +83,11 @@ import java.util.UUID;
             this.role = role;
         }
 
-        public Path getProfilePicture() {
+        public String getProfilePicture() {
             return profilePicture;
         }
 
-        public void setProfilePicture(Path profilePicture) {
+        public void setProfilePicture(String profilePicture) {
             this.profilePicture = profilePicture;
         }
 
