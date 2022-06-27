@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.*;
 public class CartController {
 
     // Get cart content
-    @GetMapping("get-cart/{cartId}")
-    public Cart getCartContentByUserId(@PathVariable String cartId) {
+    @GetMapping("get-cart/{userId}")
+    public Cart getCartContentByUserId(@PathVariable String userId) {
         return null;
     }
 
