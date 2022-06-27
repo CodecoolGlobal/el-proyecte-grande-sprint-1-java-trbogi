@@ -9,7 +9,10 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 @CrossOrigin(origins = "http://localhost:3000/")
 @RestController
@@ -23,6 +26,17 @@ public class ReservationController {
     @PostMapping("add-reservation")
     public void addNewReservation(@RequestBody Reservation reservation) {
         reservationService.addReservation(reservation);
+    }
+
+    // Book new reservation
+   @PostMapping("book-reservation")
+    public void bookReservation(@RequestBody Map<String, String> reservationInfo) {
+        UUID bookingUserId = UUID.fromString(reservationInfo.get("userId"));
+        String start = reservationInfo.get("startTime");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        LocalDateTime startTime = LocalDateTime.parse(start, formatter);
+        int courtNumber = Integer.parseInt(reservationInfo.get("courtNumber"));
+        reservationService.bookReservation(bookingUserId, startTime, courtNumber);
     }
 
     // Get reservations of the given week by court
