@@ -20,7 +20,7 @@ function TimeTable() {
     useEffect(() => {getReservations(1,startOfWeek.format("yyyy-MM-DD"))},[])
 
     const getReservations = (courtNumber, startOfWeek) => {
-        fetch(`http://localhost:8080/api/reservation/get/${courtNumber}/${startOfWeek}`, {
+        fetch(`http://localhost:8080/api/reservation/get-reservation/${courtNumber}/${startOfWeek}`, {
         })
             .then(response => response.json())
             .then(data => {
