@@ -1,33 +1,29 @@
 package com.codecool.cms.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.UUID;
 
-@Entity
+@Entity(name = "address")
 public class Address {
 
     // Field(s)
-    @Id
-    @GeneratedValue
-    private UUID id;
-    private int zipCode;
-    private String country;
-    private String city;
-    private String addressLine;
+    @Column(name = "id") @Id @GeneratedValue(strategy = GenerationType.AUTO) private UUID id;
+    @Column(name = "zip_code") private int zipCode;
+    @Column(name = "country") private String country;
+    @Column(name = "city") private String city;
+    @Column(name = "address_line") private String addressLine;
 
     // Constructor(s)
+    public Address() {
+
+    }
+
     public Address(UUID id, int zipCode, String country, String city, String addressLine) {
         this.id = id;
         this.zipCode = zipCode;
         this.country = country;
         this.city = city;
         this.addressLine = addressLine;
-    }
-
-    public Address() {
-
     }
 
     // Getter(s), Setter(s)

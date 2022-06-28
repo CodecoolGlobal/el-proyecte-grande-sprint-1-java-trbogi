@@ -10,20 +10,24 @@ import java.util.UUID;
 
 @Entity
 public class Reservation {
+    private final BigDecimal DEFAULT_PRICE = new BigDecimal(4000);
+    private final long DEFAULT_INTERVAL_IN_HOURS = 2;
 
     // Field(s)
     @Id
     @GeneratedValue
     private UUID id;
-    private int courtNumber;
 
+    private int courtNumber;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
     @JsonProperty("startTime")
     private LocalDateTime startTime;
+
     @JsonProperty("endTime")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
     private LocalDateTime endTime;
+
     @Column(
             nullable = true
     )
@@ -33,11 +37,11 @@ public class Reservation {
     private User coach;
     private BigDecimal price;
 
-    /*@ElementCollection
+    @ElementCollection
     @JoinTable(name="participants_payment", joinColumns=@JoinColumn(name="id"))
     @MapKeyColumn (name="user")
     @Column(name="payment_status")
-    private Map<User, Boolean> participants;*/
+    private Map<User, Boolean> participants;
 
     // Constructor(s)
     public Reservation(UUID id, int courtNumber, LocalDateTime start, LocalDateTime end, int participantLimit, BigDecimal price) {
@@ -49,19 +53,27 @@ public class Reservation {
         this.price = price;
     }
 
+    public Reservation(int courtNumber, LocalDateTime start, Map<User, Boolean> participants) {
+        this.courtNumber = courtNumber;
+        this.startTime = start;
+        setEndTime();
+        this.price = DEFAULT_PRICE;
+        this.participants = participants;
+    }
+
 
     public Reservation() {
 
     }
 
     // Getter(s), Setter(s)
-    /*public Map<User, Boolean> getParticipants() {
+    public Map<User, Boolean> getParticipants() {
         return participants;
     }
 
     public void setParticipants(Map<User, Boolean> participants) {
         this.participants = participants;
-    }*/
+    }
 
     public void setId(UUID id){
         this.id = id;
@@ -93,6 +105,10 @@ public class Reservation {
 
     public void setEndTime(LocalDateTime end) {
         this.endTime = end;
+    }
+
+    public void setEndTime() {
+        this.endTime = startTime.plusHours(DEFAULT_INTERVAL_IN_HOURS);
     }
 
     public int getParticipantLimit() {
