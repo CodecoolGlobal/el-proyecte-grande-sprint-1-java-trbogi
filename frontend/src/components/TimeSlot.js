@@ -4,7 +4,7 @@ import moment from "moment";
 import {CourtContext} from "../App";
 
 function TimeSlot({day, start, reservations}) {
-    const [courtContext, setCourtContext] = useContext(CourtContext);
+    const [courtContext, ] = useContext(CourtContext);
     const slotsStartTime = day+ " "+  start;
     const [inCart, setInCart] = useState(false);
     const isPast = moment(slotsStartTime).isBefore(moment());
@@ -22,7 +22,7 @@ function TimeSlot({day, start, reservations}) {
 
     const addReservationToCart = (e) => {
         //TODO: get userId and courtNumber from context
-        const reservationData = { "startTime": slotsStartTime, "userId": "039e1ff5-1ce2-4b74-8182-71cdf21c6479", "courtNumber": 1 };
+        const reservationData = { "startTime": slotsStartTime, "userId": "039e1ff5-1ce2-4b74-8182-71cdf21c6479", "courtNumber": courtContext };
         fetch('http://localhost:8080/api/cart/add-reservation', {
             method: 'POST',
             headers: {
