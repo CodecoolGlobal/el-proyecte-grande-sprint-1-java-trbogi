@@ -2,11 +2,21 @@ package com.codecool.cms.controller;
 
 import com.codecool.cms.model.Cart;
 import com.codecool.cms.model.Reservation;
+import com.codecool.cms.service.CartService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Map;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/cart/")
 public class CartController {
+
+    @Autowired
+    CartService cartService;
 
     // Get cart content
     @GetMapping("get-cart/{userId}")
@@ -20,10 +30,14 @@ public class CartController {
     }
 
     // Add reservation (court, practice) to cart
-    @PostMapping ("add-reservation/{cartId}")
-    public String addReservationToCart(@PathVariable String cartId, @RequestBody Reservation reservation) {
-        String reservationId = "";
-        return reservationId;
+    @PostMapping ("add-reservation")
+    public void addReservationToCart(@RequestBody Map<String, String> reservationInfo) {
+        UUID bookingUserId = UUID.fromString(reservationInfo.get("userId"));
+        String start = reservationInfo.get("startTime");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        LocalDateTime startTime = LocalDateTime.parse(start, formatter);
+        int courtNumber = Integer.parseInt(reservationInfo.get("courtNumber"));
+        cartService.addReservationToCart(bookingUserId, startTime, courtNumber);
     }
 
     // Delete reservation (court, practice) from cart
