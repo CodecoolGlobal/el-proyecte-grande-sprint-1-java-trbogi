@@ -18,6 +18,7 @@ public class UserService {
     CartService cartService;
 
     public void createUser(User user) {
+        // Save user to db
         boolean isCoach = user.getRole().equals(UserRole.COACH);
         boolean existsAdminInDb = user.getRole().equals(UserRole.ADMIN) && userRepository.existsByRole(UserRole.ADMIN);
         if ( isCoach || existsAdminInDb ) {
@@ -25,9 +26,8 @@ public class UserService {
         } else {
             user.setEnabled(true);
         }
-
         userRepository.save(user);
-
+        // Create cat for user
         cartService.createCartForUser(user);
     }
 
