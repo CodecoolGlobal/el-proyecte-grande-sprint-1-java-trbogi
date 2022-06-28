@@ -1,41 +1,42 @@
 package com.codecool.cms.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 import java.util.UUID;
 
 @Entity(name = "users")
 public class User {
 
     // Field(s)
-    @Id
-    @GeneratedValue
-    private UUID id;
-    private String name;
-    private String email;
-    private int phone;
-    private String password;
-    private UserRole role;
-    private String profilePicture;
-    @OneToOne
-    private Address address;
+        @Column(name = "id") @Id @GeneratedValue(strategy = GenerationType.AUTO) private UUID id;
+        @Column(name = "name") private String name;
+        @Column(name = "email") private String email;
+        @Column(name = "phone") private int phone;
+        @Column(name = "password") private String password;
+        @Column(name = "role") @Enumerated(EnumType.STRING) private UserRole role;
+        @Column(name = "profile_picture") private String profilePicture;
+        @JoinColumn(name="address_id") @OneToOne private Address address;
 
-        // Constructor(s)
-    public User(UUID id, String name, String email, int phone, String password, UserRole role, String profilePicture) {
-        this.id = id;
-        this.name = name;
-        this.email = email;
-        this.phone = phone;
-        this.password = password;
-        this.role = role;
-        this.profilePicture = profilePicture;
-    }
+    // Constructor(s)
+        public User() {
 
-    public User() {
+        }
 
-    }
+        public User(String name, String email, String password, UserRole role) {
+            this.name = name;
+            this.email = email;
+            this.password = password;
+            this.role = role;
+        }
+
+        public User(UUID id, String name, String email, int phone, String password, UserRole role, String profilePicture) {
+            this.id = id;
+            this.name = name;
+            this.email = email;
+            this.phone = phone;
+            this.password = password;
+            this.role = role;
+            this.profilePicture = profilePicture;
+        }
 
     // Getter(s), Setter(s)
         public UUID getId() {
@@ -95,6 +96,23 @@ public class User {
         }
 
         public void setAddress(Address address) {
-            this.address = address;
+                this.address = address;
+            }
+
+    // Overridden method(s)
+
+        @Override
+        public String toString() {
+            return "User{" +
+                    "id=" + id +
+                    ", name='" + name + '\'' +
+                    ", email='" + email + '\'' +
+                    ", phone=" + phone +
+                    ", password='" + password + '\'' +
+                    ", role=" + role +
+                    ", profilePicture='" + profilePicture + '\'' +
+                    ", address=" + address +
+                    '}';
         }
-    }
+
+}
