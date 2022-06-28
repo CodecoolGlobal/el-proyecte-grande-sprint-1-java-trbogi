@@ -7,6 +7,8 @@ import com.codecool.cms.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.UUID;
+
 @RestController
 @RequestMapping("/api/user/")
 @CrossOrigin(origins = "http://localhost:3000")
@@ -24,7 +26,7 @@ public class UserController {
     // Get user data
     @GetMapping("get-user/{userID}")
     public User getUserByUserId(@PathVariable String userID) {
-        return null;
+        return userService.getUserByUserId(userID);
     }
 
     // Modify user data
