@@ -1,6 +1,5 @@
 package com.codecool.cms.controller;
 
-import com.codecool.cms.data.dto.NewUserDto;
 import com.codecool.cms.model.Address;
 import com.codecool.cms.model.User;
 import com.codecool.cms.service.UserService;
@@ -19,13 +18,13 @@ public class UserController {
 
     // Create new user
     @PostMapping("create-user")
-    public void createUser(@RequestBody NewUserDto newUserData) {
-        userService.createUser(newUserData);
+    public void createUser(@RequestBody User user) {
+        userService.createUser(user);
     }
 
     // Get user data
     @GetMapping("get-user/{userID}")
-    public User getUserByUserId(@PathVariable String userID) {
+    public User getUserByUserId(@PathVariable UUID userID) {
         return userService.getUserByUserId(userID);
     }
 
