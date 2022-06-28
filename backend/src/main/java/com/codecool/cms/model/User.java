@@ -13,6 +13,7 @@ public class User {
         @Column(name = "phone") private int phone;
         @Column(name = "password") private String password;
         @Column(name = "role") @Enumerated(EnumType.STRING) private UserRole role;
+        @Column(name = "enabled") private boolean enabled;
         @Column(name = "profile_picture") private String profilePicture;
         @JoinColumn(name="address_id") @OneToOne private Address address;
 
@@ -28,19 +29,13 @@ public class User {
             this.role = role;
         }
 
-        public User(UUID id, String name, String email, int phone, String password, UserRole role, String profilePicture) {
-            this.id = id;
-            this.name = name;
-            this.email = email;
-            this.phone = phone;
-            this.password = password;
-            this.role = role;
-            this.profilePicture = profilePicture;
-        }
-
     // Getter(s), Setter(s)
         public UUID getId() {
             return id;
+        }
+
+        public void setId(UUID id) {
+            this.id = id;
         }
 
         public String getName() {
@@ -83,6 +78,14 @@ public class User {
             this.role = role;
         }
 
+        public boolean isEnabled() {
+            return enabled;
+        }
+
+        public void setEnabled(boolean enabled) {
+            this.enabled = enabled;
+        }
+
         public String getProfilePicture() {
             return profilePicture;
         }
@@ -100,7 +103,6 @@ public class User {
             }
 
     // Overridden method(s)
-
         @Override
         public String toString() {
             return "User{" +

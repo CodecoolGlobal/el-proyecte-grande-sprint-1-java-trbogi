@@ -20,10 +20,25 @@ public class UserService {
         String name = newUserData.getName();
         String email = newUserData.getEmail();
         String password = newUserData.getPassword();
-        UserRole role = UserRole.valueOf(newUserData.getRole());    // TODO Consultation: A role-t azt milyen tipuskent kene tarolni az adatbazisban?
+        UserRole role = UserRole.valueOf(newUserData.getRole());
 
-        User user = new User(name, email, password, role);          // TODO Consultation: Az UUID-t a backenden generaljuk, vagy az adatbazisban?
+        User user = new User(name, email, password, role);
+
+        // Determine enabled state of user
+        boolean isCoach = role.equals(UserRole.COACH);
+        boolean existsAdminInDb = role.equals(UserRole.ADMIN) && userRepository.existsByRole(UserRole.ADMIN);
+        if ( isCoach || existsAdminInDb ) {
+            user.setEnabled(false);
+        } else {
+            user.setEnabled(true);
+        }
+
         userRepository.save(user);
+    }
+
+    public User getUserByUserId(String userID) {
+        UUID id = UUID.fromString(userID);
+        return userRepository.getUserById(id);
     }
 
 }
