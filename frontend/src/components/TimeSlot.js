@@ -3,8 +3,9 @@ import {useState} from "react";
 import moment from "moment";
 
 function TimeSlot({day, start, reservations}) {
+    const slotsStartTime = day+ " "+  start;
     const [inCart, setInCart] = useState(false);
-    const isPast = moment(day+ " "+  start).isBefore(moment());
+    const isPast = moment(slotsStartTime).isBefore(moment());
     const isReserved = () => {
         for (const reservation of reservations) {
             const timeData = reservation.startTime.split(" ");
@@ -18,8 +19,22 @@ function TimeSlot({day, start, reservations}) {
     }
 
     const addReservationToCart = (e) => {
-        //TODO: add reservation to cart in backend
-        console.log("reserve")
+        //TODO: get userId and courtNumber from context
+        const reservationData = { "startTime": slotsStartTime, "userId": "9e455fb2-82ab-4d4f-ad7c-d0513bd0eef1", "courtNumber": 1 };
+        fetch('http://localhost:8080/api/cart/add-reservation', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(reservationData),
+        })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Success:', data);
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
         setInCart(true);
     }
 
