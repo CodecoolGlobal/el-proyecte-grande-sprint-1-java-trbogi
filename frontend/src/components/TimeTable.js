@@ -19,7 +19,7 @@ function TimeTable() {
     const [directionOfSwipe, setDirectionOfSwipe] = useState("right");
     const [reservations, setReservations] = useState([]);
 
-    useEffect(() => {getReservations(courtContext, startOfWeek.format("yyyy-MM-DD"))},[])
+    useEffect(() => {getReservations(courtContext, days[0].format("yyyy-MM-DD"))},[courtContext])
 
     const getReservations = (courtNumber, startOfWeek) => {
         fetch(`http://localhost:8080/api/reservation/get-reservation/${courtNumber}/${startOfWeek}`, {
