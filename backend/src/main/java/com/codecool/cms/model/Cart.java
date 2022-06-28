@@ -21,19 +21,17 @@ public class Cart {
     @ElementCollection
     @CollectionTable(name = "cart_content")
     @Column(name = "quantity")
-    //private Map<Phone, Date> phoneRegister = new HashMap<>();
     Map<Product, Integer> products = new HashMap<>();
     @OneToMany
     List<Reservation> reservations;
 
     // Constructor(s)
-    public Cart(UUID id, User user) {
-        this.id = id;
-        this.user = user;
-    }
-
     public Cart() {
 
+    }
+
+    public Cart(User user) {
+        this.user = user;
     }
 
     // Getter(s), Setter(s)
