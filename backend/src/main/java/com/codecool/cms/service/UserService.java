@@ -7,13 +7,14 @@ import com.codecool.cms.model.UserRole;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.UUID;
-
 @Service
 public class UserService {
 
     @Autowired
     UserRepository userRepository;
+
+    @Autowired
+    CartService cartService;
 
     public void createUser(NewUserDto newUserData) {
 
@@ -24,6 +25,7 @@ public class UserService {
 
         User user = new User(name, email, password, role);          // TODO Consultation: Az UUID-t a backenden generaljuk, vagy az adatbazisban?
         userRepository.save(user);
+        cartService.createCartForUser(user);
     }
 
 }
