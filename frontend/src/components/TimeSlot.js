@@ -1,8 +1,10 @@
 import {BsBagPlusFill, BsBagDash} from "react-icons/bs";
-import {useState} from "react";
+import {useContext, useState} from "react";
 import moment from "moment";
+import {CourtContext} from "../App";
 
 function TimeSlot({day, start, reservations}) {
+    const [courtContext, setCourtContext] = useContext(CourtContext);
     const slotsStartTime = day+ " "+  start;
     const [inCart, setInCart] = useState(false);
     const isPast = moment(slotsStartTime).isBefore(moment());
@@ -20,7 +22,7 @@ function TimeSlot({day, start, reservations}) {
 
     const addReservationToCart = (e) => {
         //TODO: get userId and courtNumber from context
-        const reservationData = { "startTime": slotsStartTime, "userId": "9e455fb2-82ab-4d4f-ad7c-d0513bd0eef1", "courtNumber": 1 };
+        const reservationData = { "startTime": slotsStartTime, "userId": "039e1ff5-1ce2-4b74-8182-71cdf21c6479", "courtNumber": 1 };
         fetch('http://localhost:8080/api/cart/add-reservation', {
             method: 'POST',
             headers: {
@@ -28,10 +30,7 @@ function TimeSlot({day, start, reservations}) {
             },
             body: JSON.stringify(reservationData),
         })
-            .then(response => response.json())
-            .then(data => {
-                console.log('Success:', data);
-            })
+            .then(response => response.ok ? console.log('Success'): console.log('Error'))
             .catch((error) => {
                 console.error('Error:', error);
             });
