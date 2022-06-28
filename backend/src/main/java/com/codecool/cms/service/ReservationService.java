@@ -31,15 +31,13 @@ public class ReservationService {
         return reservationRepository.findByCourtNumberAndStartTimeBetween(courtNumber, startOfWeek, nextMonday);
     }
 
-    public void bookReservation(UUID userId, LocalDateTime startTime, int courtNumber){
-        //User user = userRepository.getById(userId);
-        //Test TODO: connect to user table
-        User user = new User();
-        userRepository.save(user);
+    public Reservation createReservation(UUID userId, LocalDateTime startTime, int courtNumber){
+        User user = userRepository.getById(userId);
         Map<User, Boolean> participants = new HashMap<>();
-        participants.put(user, true);
+        participants.put(user, false);
         Reservation reservation = new Reservation(courtNumber, startTime, participants);
         reservationRepository.save(reservation);
+        return reservation;
     }
 
 }
