@@ -9,8 +9,8 @@ import java.util.UUID;
 
 public interface UserRepository extends JpaRepository<User, UUID> {
 
-    Boolean existsByRole(UserRole role);
+    Boolean existsById(UserRole role);
 
-    User getUserById(UUID id);
+    Boolean existsByRole(UserRole role);
 
 }

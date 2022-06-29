@@ -10,7 +10,7 @@ public class User {
         @Column(name = "id") @Id @GeneratedValue(strategy = GenerationType.AUTO) private UUID id;
         @Column(name = "name") private String name;
         @Column(name = "email") private String email;
-        @Column(name = "phone") private int phone;
+        @Column(name = "phone") private Integer phone;
         @Column(name = "password") private String password;
         @Column(name = "role") @Enumerated(EnumType.STRING) private UserRole role;
         @Column(name = "enabled") private boolean enabled;
@@ -47,11 +47,11 @@ public class User {
             this.email = email;
         }
 
-        public int getPhone() {
+        public Integer getPhone() {
             return phone;
         }
 
-        public void setPhone(int phone) {
+        public void setPhone(Integer phone) {
             this.phone = phone;
         }
 
@@ -78,6 +78,10 @@ public class User {
         public void setEnabled(boolean enabled) {
             this.enabled = enabled;
         }
+
+        public boolean getEnabled() {
+            return enabled;
+    }
 
         public String getProfilePicture() {
             return profilePicture;
