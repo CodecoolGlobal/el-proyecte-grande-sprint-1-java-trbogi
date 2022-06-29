@@ -1,17 +1,14 @@
-import {useState} from "react";
+import {CourtContext} from "../App";
+import {useContext} from "react";
 
 function Courts() {
-    const courts = ['Court 1', 'Court 2', 'Court 3', 'Court 4']
-    const [selectedCourt, setSelectedCourt] = useState("Court 1");
-
-    const selectCourt = (court) => {
-        setSelectedCourt(court);
-    }
+    const courts = ['1', '2', '3', '4']
+    const [courtContext, setCourtContext] = useContext(CourtContext);
 
     return(
         <div className="courts">
             {courts.map((court) => {
-                return <span key={court} className={selectedCourt === court ? "selectedCourt" : null} onClick={() => {selectCourt(court)}}>{court}</span>
+                return <span key={court} className={courtContext === court ? "selectedCourt" : null} onClick={() => setCourtContext(court)}>Court {court}</span>
             })}
         </div>
     )
