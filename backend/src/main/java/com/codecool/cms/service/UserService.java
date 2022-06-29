@@ -1,11 +1,12 @@
 package com.codecool.cms.service;
 
 import com.codecool.cms.data.UserRepository;
-import com.codecool.cms.data.dto.NewUserDto;
 import com.codecool.cms.model.User;
 import com.codecool.cms.model.UserRole;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.UUID;
 
 @Service
 public class UserService {
@@ -16,18 +17,9 @@ public class UserService {
     @Autowired
     CartService cartService;
 
-    public void createUser(NewUserDto newUserData) {
-
-        String name = newUserData.getName();
-        String email = newUserData.getEmail();
-        String password = newUserData.getPassword();
-        UserRole role = UserRole.valueOf(newUserData.getRole());
-
-        User user = new User(name, email, password, role);
-
-        // Determine enabled state of user
-        boolean isCoach = role.equals(UserRole.COACH);
-        boolean existsAdminInDb = role.equals(UserRole.ADMIN) && userRepository.existsByRole(UserRole.ADMIN);
+    public void createUser(User user) {
+        boolean isCoach = user.getRole().equals(UserRole.COACH);
+        boolean existsAdminInDb = user.getRole().equals(UserRole.ADMIN) && userRepository.existsByRole(UserRole.ADMIN);
         if ( isCoach || existsAdminInDb ) {
             user.setEnabled(false);
         } else {
@@ -35,11 +27,11 @@ public class UserService {
         }
 
         userRepository.save(user);
+
         cartService.createCartForUser(user);
     }
 
-    public User getUserByUserId(String userID) {
-        UUID id = UUID.fromString(userID);
+    public User getUserByUserId(UUID id) {
         return userRepository.getUserById(id);
     }
 
