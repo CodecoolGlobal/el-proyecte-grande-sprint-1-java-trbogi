@@ -1,17 +1,27 @@
-import './style/main.css'
-import TimeTable from './components/reservation/TimeTable.js'
-import {createContext, useState} from 'react'
+import './style/main.css';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Layout from './components/Layout';
+import TimeTable from './components/reservation/TimeTable.js';
+import Shop from './components/shop/Shop.js';
+import Register from './components/user_management/Register';
+import Login from './components/user_management/Login';
 
-export const CourtContext = createContext("1");
+
 function App() {
-    const [court, setCourt] = useState("1");
-
     return (
-        <CourtContext.Provider value={[court, setCourt]}>
-            <div className="container" >
-                <TimeTable></TimeTable>
-            </div>
-        </CourtContext.Provider>
+      <div>
+        <BrowserRouter>
+            <Layout>
+                <Routes>
+                    <Route path="/shop" element={<Shop />} />
+                    <Route path="/reservation" element={<TimeTable />} />
+                    <Route path="/register" element={<Register />} />
+                    <Route path="/login" element={<Login />} />
+                </Routes>
+            </Layout>  
+        </BrowserRouter>
+      </div>
+        
   );
 }
 

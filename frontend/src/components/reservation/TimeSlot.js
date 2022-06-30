@@ -1,7 +1,7 @@
 import {BsBagPlusFill, BsBagDash} from "react-icons/bs";
 import {useContext, useState} from "react";
 import moment from "moment";
-import {CourtContext} from "../../App";
+import {CourtContext} from "./TimeTable";
 
 function TimeSlot({day, start, reservations}) {
     const [courtContext, ] = useContext(CourtContext);
