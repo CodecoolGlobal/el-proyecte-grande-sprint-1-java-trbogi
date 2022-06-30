@@ -4,11 +4,11 @@ import AuthContext from "../context/AuthContext";
 import jwtDecode from "jwt-decode";
 
 const Login = () => {
-    const [setAuthTokens, setUser, setUserId] = useContext(AuthContext);
+    const [authTokens, setAuthTokens, user, setUser, userId, setUserId] = useContext(AuthContext);
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
 
-    const submit = (e: SyntheticEvent) => {
+    const submit = (e) => {
         e.preventDefault();
         fetch("http://localhost:8080/api/user/login", {
             method: 'POST',
@@ -24,6 +24,8 @@ const Login = () => {
             setUser(userData['sub']);
             setUserId(userData['userId']);
         })
+        console.log(authTokens)
+        console.log(user)
         }
 
 

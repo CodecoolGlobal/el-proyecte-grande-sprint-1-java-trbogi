@@ -11,16 +11,16 @@ function App() {
     return (
       <div>
         <BrowserRouter>
-            <Layout>
-                <AuthProvider>
-                    <Routes>
-                        <Route path="/shop" element={<Shop />} />
-                        <Route path="/reservation" element={<TimeTable />} />
-                        <Route path="/register" element={<Register />} />
-                        <Route path="/login" element={<Login />} />
-                    </Routes>
-                </AuthProvider>
-            </Layout>  
+            <AuthProvider>
+                <Layout>
+                        <Routes>
+                            <Route path="/shop" element={<Shop />} />
+                            <Route path="/reservation" element={<TimeTable />} />
+                            <Route path="/register" element={<Register />} />
+                            <Route path="/login" element={<Login />} />
+                        </Routes>
+                </Layout>
+            </AuthProvider>
         </BrowserRouter>
       </div>
         
