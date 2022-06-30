@@ -4,11 +4,11 @@ import AuthContext from "../context/AuthContext";
 import jwtDecode from "jwt-decode";
 
 const Login = () => {
-    const [authTokens, setAuthTokens, user, setUser, userId, setUserId] = useContext(AuthContext);
+    const {authTokens, setAuthTokens, user, setUser, userId, setUserId} = useContext(AuthContext);
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
 
-    const submit = (e) => {
+    const submit = async (e) => {
         e.preventDefault();
         fetch("http://localhost:8080/api/user/login", {
             method: 'POST',
@@ -21,16 +21,14 @@ const Login = () => {
             console.log('Success:', data);
             setAuthTokens(data);
             const userData = jwtDecode(data['access_token']);
-            setUser(userData['sub']);
-            setUserId(userData['userId']);
-        })
-        console.log(authTokens)
-        console.log(user)
+            setUser(userData);
+            localStorage.setItem('authTokens', JSON.stringify(data))
+          })
         }
 
 
     return (
-        <div>
+        <div className="container">
             <form onSubmit={submit}>
                     <h1>Please sign in</h1>
                     <div>
