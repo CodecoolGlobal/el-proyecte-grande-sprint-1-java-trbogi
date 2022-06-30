@@ -14,7 +14,7 @@ const Header = () => {
             <button><Link to="/">Home</Link></button>
             <button><Link to="/shop">Shop</Link></button>
             <button><Link to="/reservation">Reservation</Link></button>
-            <button onClick={() => setRegistrationModalDialogConent(<Registration closeDialog={() => setRegistrationModalDialogConent("")}></Registration>)}>Registration</button>      {/* TODO: Megkérdezni miért kell a () => ... */}
+            <button onClick={() => setRegistrationModalDialogConent(<Registration closeDialog={() => setRegistrationModalDialogConent("")}></Registration>)}>Registration</button>
             <button onClick={() => setLoginModalDialogConent(<Login closeDialog={() => setLoginModalDialogConent("")}></Login>)}>Login</button>
             <button id="logout-button">Logout</button>
 
@@ -25,3 +25,6 @@ const Header = () => {
 }
 
 export default Header
+
+// Consultation:
+// - Miért kell a () => ..., ha függvényt akarunk meghívni?
