@@ -1,11 +1,16 @@
-import Courts from "./Courts";
+import React from 'react';
+import { Link } from "react-router-dom";
 
-function Header({yearAndMonth, directionOfSwipe}) {
-    return(
+
+const Header = () => {
+    return (
         <div>
-            <Courts></Courts>
-            <div className={directionOfSwipe} style={{fontSize: '1.8rem', fontWeight: '900', textAlign: 'center'}}>{yearAndMonth}</div>
+            <button><Link to="/shop">Shop</Link></button>
+            <button><Link to="/reservation">Reservation</Link></button>
+            <button><Link to="/register">Register</Link></button>
+            <button><Link to="/login">Login</Link></button>
         </div>
     )
+}
 
-}export default Header
+export default Header

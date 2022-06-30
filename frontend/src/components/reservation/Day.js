@@ -1,7 +1,6 @@
 import Moment from "react-moment";
 import TimeSlot from "./TimeSlot";
 
-
 function Day({day, reservations, directionOfSwipe}) {
     const dayAsString = day.format("YYYY-MM-DD");
     const slots = ['08:00',
@@ -22,4 +21,6 @@ function Day({day, reservations, directionOfSwipe}) {
             </div>
         </>
     );
-}export default Day
+}
+
+export default Day

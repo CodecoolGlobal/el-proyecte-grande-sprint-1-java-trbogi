@@ -6,4 +6,6 @@ function Week({days, reservations, directionOfSwipe}) {
             {days.map((day) =>{return <Day key={day} day={day} reservations={reservations} directionOfSwipe={directionOfSwipe}></Day>})}
         </div>
     );
-}export default Week
+}
+
+export default Week
