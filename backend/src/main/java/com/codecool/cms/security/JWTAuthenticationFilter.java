@@ -46,7 +46,7 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
                                             Authentication auth) throws IOException {
         com.codecool.cms.model.User user = (com.codecool.cms.model.User) auth.getPrincipal();
         Algorithm algorithm = Algorithm.HMAC256("secret".getBytes());
-        String accessToken = JWT.create().withSubject(user.getUsername())
+        String accessToken = JWT.create().withSubject(user.getUsername()).withClaim("userId", String.valueOf(user.getId()))
                 .withExpiresAt(new Date(System.currentTimeMillis() + 10 * 60 * 1000))
                 .withClaim("roles", user.getAuthorities().stream().map(GrantedAuthority::getAuthority).collect(Collectors.toList()))
                 .sign(algorithm);
