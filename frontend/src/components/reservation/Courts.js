@@ -1,4 +1,4 @@
-import {CourtContext} from "../App";
+import {CourtContext} from "./TimeTable";
 import {useContext} from "react";
 
 function Courts() {
@@ -12,5 +12,6 @@ function Courts() {
             })}
         </div>
     )
+}
 
-}export default Courts
+export default Courts

@@ -1,9 +1,10 @@
-import Header from "./Header"
-import Week from "./Week"
+import Header from "./Header";
+import Week from "./Week";
 import {FaAngleLeft, FaAngleRight} from "react-icons/fa";
 import moment from "moment";
-import {useEffect,useContext, useState} from "react";
-import {CourtContext} from "../App";
+import {useEffect,useContext, useState, createContext} from "react";
+
+export const CourtContext = createContext("1");
 
 function TimeTable() {
     const [courtContext, ] = useContext(CourtContext);
@@ -18,6 +19,7 @@ function TimeTable() {
     const [days, setDays] = useState([monday, tuesday, wednesday, thursday, friday, saturday, sunday]);
     const [directionOfSwipe, setDirectionOfSwipe] = useState("right");
     const [reservations, setReservations] = useState([]);
+    const [court, setCourt] = useState("1");
 
     useEffect(() => {getReservations(courtContext, days[0].format("yyyy-MM-DD"))},[courtContext])
 
@@ -46,25 +48,30 @@ function TimeTable() {
     }
 
     return(
-        <div className="timetable-container-with-arrows">
-            <div className="left-side">
-                <div className="times">
-                    <p>08:00 - 10:00</p>
-                    <p>10:00 - 12:00</p>
-                    <p>12:00 - 14:00</p>
-                    <p>14:00 - 16:00 </p>
-                    <p>16:00 - 18:00</p>
-                    <p>18:00 - 20:00</p>
+        <CourtContext.Provider value={[court, setCourt]}>
+            <div className="container" >
+                <div className="timetable-container-with-arrows">
+                    <div className="left-side">
+                        <div className="times">
+                            <p>08:00 - 10:00</p>
+                            <p>10:00 - 12:00</p>
+                            <p>12:00 - 14:00</p>
+                            <p>14:00 - 16:00 </p>
+                            <p>16:00 - 18:00</p>
+                            <p>18:00 - 20:00</p>
+                        </div>
+                    </div>
+                    <FaAngleLeft size={40} visibility={isCurrentWeek() ? "hidden":"visible"} onClick={() => {turnPage(-1)}}></FaAngleLeft>
+                    <div className="timetable">
+                        <Header directionOfSwipe={directionOfSwipe} yearAndMonth={days[0].format("YYYY. MMMM")}></Header>
+                        <Week directionOfSwipe={directionOfSwipe} days={days} reservations={reservations}></Week>
+                    </div>
+                    <FaAngleRight size={40} onClick={() => {turnPage(1)}}></FaAngleRight>
+
                 </div>
             </div>
-            <FaAngleLeft size={40} visibility={isCurrentWeek() ? "hidden":"visible"} onClick={() => {turnPage(-1)}}></FaAngleLeft>
-            <div className="timetable">
-                <Header directionOfSwipe={directionOfSwipe} yearAndMonth={days[0].format("YYYY. MMMM")}></Header>
-                <Week directionOfSwipe={directionOfSwipe} days={days} reservations={reservations}></Week>
-            </div>
-            <FaAngleRight size={40} onClick={() => {turnPage(1)}}></FaAngleRight>
-
-        </div>
+        </CourtContext.Provider>
     )
+}
 
-}export default TimeTable
+export default TimeTable

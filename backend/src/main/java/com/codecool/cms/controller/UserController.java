@@ -30,13 +30,14 @@ public class UserController {
 
     // Modify user data
     @PatchMapping("modify-user/{userID}")
-    public void ModifyUserByUserId(@PathVariable String userID, @RequestBody User modifiedUserData) {
+    public void modifyUserByUserId(@PathVariable UUID userID, @RequestBody User modifiedUserData) {
+        userService.modifyUserByUserId(userID, modifiedUserData);
     }
 
     // Get address of user
     @GetMapping("get-user-address/{userID}")
-    public Address getUserAddressByUserId(@PathVariable String userID) {
-        return null;
+    public Address getUserAddressByUserId(@PathVariable UUID userID) {
+        return userService.getUserAddressByUserId(userID);
     }
 
 }

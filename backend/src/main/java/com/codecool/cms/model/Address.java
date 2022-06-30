@@ -8,7 +8,7 @@ public class Address {
 
     // Field(s)
     @Column(name = "id") @Id @GeneratedValue(strategy = GenerationType.AUTO) private UUID id;
-    @Column(name = "zip_code") private int zipCode;
+    @Column(name = "zip_code") private Integer zipCode;
     @Column(name = "country") private String country;
     @Column(name = "city") private String city;
     @Column(name = "address_line") private String addressLine;
@@ -18,24 +18,20 @@ public class Address {
 
     }
 
-    public Address(UUID id, int zipCode, String country, String city, String addressLine) {
-        this.id = id;
-        this.zipCode = zipCode;
-        this.country = country;
-        this.city = city;
-        this.addressLine = addressLine;
-    }
-
     // Getter(s), Setter(s)
     public UUID getId() {
         return id;
     }
 
-    public int getZipCode() {
+    public void setId(UUID id) {
+        this.id = id;
+    }
+
+    public Integer getZipCode() {
         return zipCode;
     }
 
-    public void setZipCode(int zipCode) {
+    public void setZipCode(Integer zipCode) {
         this.zipCode = zipCode;
     }
 
@@ -61,6 +57,18 @@ public class Address {
 
     public void setAddressLine(String addressLine) {
         this.addressLine = addressLine;
+    }
+
+    // Overridden Method(s)
+    @Override
+    public String toString() {
+        return "Address{" +
+                "id=" + id +
+                ", zipCode=" + zipCode +
+                ", country='" + country + '\'' +
+                ", city='" + city + '\'' +
+                ", addressLine='" + addressLine + '\'' +
+                '}';
     }
 
 }
