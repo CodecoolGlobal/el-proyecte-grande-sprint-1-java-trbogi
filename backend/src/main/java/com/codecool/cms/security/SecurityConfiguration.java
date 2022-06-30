@@ -37,7 +37,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http.cors().configurationSource(request -> new CorsConfiguration().applyPermitDefaultValues());
         http.authorizeRequests()
                 .antMatchers(HttpMethod.POST, "/api/user/**").permitAll()
-                .antMatchers(HttpMethod.GET, "/api/reservation/**").hasRole(UserRole.MEMBER.name())
+                .antMatchers(HttpMethod.GET, "/api/reservation/**").permitAll()
                 .antMatchers(HttpMethod.POST, "/api/reservation/**").hasRole(UserRole.MEMBER.name())
                 .and()
                 .addFilter(jwtAuthenticationFilter)
