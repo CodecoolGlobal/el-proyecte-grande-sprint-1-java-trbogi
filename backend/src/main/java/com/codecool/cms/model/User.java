@@ -1,10 +1,11 @@
 package com.codecool.cms.model;
 
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.UUID;
 
@@ -44,7 +45,7 @@ public class User implements UserDetails {
 
         @Override
         public Collection<? extends GrantedAuthority> getAuthorities() {
-            return new ArrayList<>();
+            return Arrays.asList(new SimpleGrantedAuthority(role.name()));
         }
 
         @Override
