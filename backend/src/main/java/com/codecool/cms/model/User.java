@@ -4,8 +4,8 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 import java.util.UUID;
 
 @Entity(name = "users")
@@ -13,7 +13,7 @@ public class User implements UserDetails {
 
     // Field(s)
         @Column(name = "id") @Id @GeneratedValue(strategy = GenerationType.AUTO) private UUID id;
-        @Column(name = "name") private String name;
+        @Column(name = "username") private String username;
         @Column(name = "email") private String email;
         @Column(name = "phone") private int phone;
         @Column(name = "password") private String password;
@@ -21,9 +21,6 @@ public class User implements UserDetails {
         @Column(name = "enabled") private boolean enabled;
         @Column(name = "profile_picture") private String profilePicture;
         @JoinColumn(name="address_id") @OneToOne private Address address;
-        @ManyToMany
-        @JoinTable(name = "authority", joinColumns = @JoinColumn(referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(referencedColumnName = "id") )
-        private List<Authority> authorities;
 
     // Constructor(s)
         public User() {
@@ -39,12 +36,46 @@ public class User implements UserDetails {
             this.id = id;
         }
 
-        public String getName() {
-            return name;
+        @Override
+        public String getUsername() {
+            return username;
         }
 
-        public void setName(String name) {
-            this.name = name;
+
+        @Override
+        public Collection<? extends GrantedAuthority> getAuthorities() {
+            return new ArrayList<>();
+        }
+
+        @Override
+        public String getPassword() {
+            return password;
+        }
+
+
+        @Override
+        public boolean isAccountNonExpired() {
+            return true;
+        }
+
+        @Override
+        public boolean isAccountNonLocked() {
+            return true;
+        }
+
+        @Override
+        public boolean isCredentialsNonExpired() {
+            return true;
+        }
+
+        @Override
+        public boolean isEnabled() {
+            return enabled;
+        }
+
+
+        public void setUsername(String name) {
+            this.username = name;
         }
 
         public String getEmail() {
@@ -75,10 +106,6 @@ public class User implements UserDetails {
             this.role = role;
         }
 
-        public boolean isEnabled() {
-            return enabled;
-        }
-
         public void setEnabled(boolean enabled) {
             this.enabled = enabled;
         }
@@ -99,41 +126,12 @@ public class User implements UserDetails {
                 this.address = address;
             }
 
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return authorities;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    @Override
-    public String getUsername() {
-        return this.name;
-    }
-
-    @Override
-    public boolean isAccountNonExpired() {
-        return this.enabled;
-    }
-
-    @Override
-    public boolean isAccountNonLocked() {
-        return this.enabled;
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return this.enabled;
-    }
-
     // Overridden method(s)
         @Override
         public String toString() {
             return "User{" +
                     "id=" + id +
-                    ", name='" + name + '\'' +
+                    ", name='" + username + '\'' +
                     ", email='" + email + '\'' +
                     ", phone=" + phone +
                     ", password='" + password + '\'' +
@@ -142,5 +140,4 @@ public class User implements UserDetails {
                     ", address=" + address +
                     '}';
         }
-
 }
