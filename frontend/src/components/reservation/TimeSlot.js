@@ -2,8 +2,10 @@ import {BsBagPlusFill, BsBagDash} from "react-icons/bs";
 import {useContext, useState} from "react";
 import moment from "moment";
 import {CourtContext} from "./TimeTable";
+import AuthContext from "../context/AuthContext";
 
 function TimeSlot({day, start, reservations}) {
+    const {authTokens, user} = useContext(AuthContext);
     const [courtContext, ] = useContext(CourtContext);
     const slotsStartTime = day+ " "+  start;
     const [inCart, setInCart] = useState(false);
@@ -21,20 +23,29 @@ function TimeSlot({day, start, reservations}) {
     }
 
     const addReservationToCart = (e) => {
-        //TODO: get userId and courtNumber from context
-        const reservationData = { "startTime": slotsStartTime, "userId": "039e1ff5-1ce2-4b74-8182-71cdf21c6479", "courtNumber": courtContext };
+        if (!user){
+            alert("Please log in to book a court!")
+            return;
+        }
+        const reservationData = { "startTime": slotsStartTime, "userId": user['userId'], "courtNumber": courtContext };
         fetch('http://localhost:8080/api/cart/add-reservation', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
+                'Authentication': 'Bearer ' + authTokens['access_token']
             },
             body: JSON.stringify(reservationData),
         })
-            .then(response => response.ok ? console.log('Success'): console.log('Error'))
+            .then(response =>{
+                if (response.ok){
+                    console.log('Success')
+                    setInCart(true);
+                }else if (response.status !== 403){
+                    alert("You have to be a member to book a court!")
+                }})
             .catch((error) => {
                 console.error('Error:', error);
             });
-        setInCart(true);
     }
 
     const removeReservationFromCart = () => {
