@@ -2,12 +2,11 @@ import Header from "./Header";
 import Week from "./Week";
 import {FaAngleLeft, FaAngleRight} from "react-icons/fa";
 import moment from "moment";
-import {useEffect,useContext, useState, createContext} from "react";
+import {useEffect, useState, createContext} from "react";
 
 export const CourtContext = createContext("1");
 
 function TimeTable() {
-    const [courtContext, ] = useContext(CourtContext);
     const startOfWeek = moment().startOf('isoweek');
     const monday = startOfWeek;
     const tuesday = startOfWeek.clone().add(1, 'days');
@@ -21,7 +20,7 @@ function TimeTable() {
     const [reservations, setReservations] = useState([]);
     const [court, setCourt] = useState("1");
 
-    useEffect(() => {getReservations(courtContext, days[0].format("yyyy-MM-DD"))},[courtContext])
+    useEffect(() => {getReservations(court, days[0].format("yyyy-MM-DD"))},[court])
 
     const getReservations = (courtNumber, startOfWeek) => {
         fetch(`http://localhost:8080/api/reservation/get-reservation/${courtNumber}/${startOfWeek}`, {
@@ -43,7 +42,7 @@ function TimeTable() {
         }
         setDirectionOfSwipe(amount === 1 ? "right" :"left");
         const startOfNextWeek = days[0].format("yyyy-MM-DD");
-        getReservations(courtContext, startOfNextWeek);
+        getReservations(court, startOfNextWeek);
         setDays([...days])
     }
 
