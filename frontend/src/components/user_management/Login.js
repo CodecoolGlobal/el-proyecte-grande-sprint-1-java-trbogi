@@ -1,7 +1,10 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import {SyntheticEvent, useState} from "react";
+import AuthContext from "../context/AuthContext";
+import jwtDecode from "jwt-decode";
 
 const Login = () => {
+    const [setAuthTokens, setUser, setUserId] = useContext(AuthContext);
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
 
@@ -15,7 +18,12 @@ const Login = () => {
                 "password": password
             })
         }).then(r => r.json()).then(data => {
-            console.log('Success:', data)})
+            console.log('Success:', data);
+            setAuthTokens(data);
+            const userData = jwtDecode(data['access_token']);
+            setUser(userData['sub']);
+            setUserId(userData['userId']);
+        })
         }
 
 
