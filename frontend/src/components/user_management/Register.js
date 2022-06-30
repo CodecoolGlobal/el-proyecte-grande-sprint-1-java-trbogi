@@ -4,6 +4,8 @@ const Register = () => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [role, setRole] = useState("MEMBER");
+    const [redirect, setRedirect] = useState(false);
+    const navigate = useNavigate();
 
     const submit = (e: SyntheticEvent) => {
         e.preventDefault();
@@ -15,7 +17,14 @@ const Register = () => {
                 "password": password,
                 "role": role
             })
-        }).then(r => console.log("status" + r.status))
+        }).then(r => {
+            console.log("status" + r.status);
+            setRedirect(true)})
+
+    }
+
+    if (redirect){
+        return navigate("/login")
     }
 
     return (
