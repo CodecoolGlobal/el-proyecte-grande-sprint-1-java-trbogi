@@ -1,4 +1,5 @@
 import React, {useState, SyntheticEvent} from 'react'
+import {useNavigate} from "react-router-dom";
 
 const Register = () => {
     const [username, setUsername] = useState("");
