@@ -3,7 +3,7 @@ import Week from "./Week"
 import {FaAngleLeft, FaAngleRight} from "react-icons/fa";
 import moment from "moment";
 import {useEffect,useContext, useState} from "react";
-import {CourtContext} from "../App";
+import {CourtContext} from "../../App";
 
 function TimeTable() {
     const [courtContext, ] = useContext(CourtContext);
@@ -66,5 +66,6 @@ function TimeTable() {
 
         </div>
     )
+}
 
-}export default TimeTable
+export default TimeTable

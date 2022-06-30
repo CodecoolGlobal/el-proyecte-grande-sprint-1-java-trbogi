@@ -1,7 +1,7 @@
 import {BsBagPlusFill, BsBagDash} from "react-icons/bs";
 import {useContext, useState} from "react";
 import moment from "moment";
-import {CourtContext} from "../App";
+import {CourtContext} from "../../App";
 
 function TimeSlot({day, start, reservations}) {
     const [courtContext, ] = useContext(CourtContext);
@@ -53,4 +53,6 @@ function TimeSlot({day, start, reservations}) {
         return(<p style={{backgroundColor: "aliceblue"}} onClick={addReservationToCart}>{start} <br/>
             <BsBagPlusFill className="addToCartIcon"></BsBagPlusFill></p>)
     }
-}export default TimeSlot
+}
+
+export default TimeSlot
