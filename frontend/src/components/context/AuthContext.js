@@ -1,4 +1,4 @@
-import {createContext, useState, useEffect} from 'react'
+import {createContext, useState} from 'react'
 import jwtDecode from "jwt-decode";
 
 const AuthContext = createContext()
@@ -16,11 +16,30 @@ export const AuthProvider = ({children}) => {
         localStorage.removeItem("authTokens");
     }
 
+    const login = (username, password) => {
+        fetch("http://localhost:8080/api/user/login", {
+            method: 'POST',
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+            body: new URLSearchParams({
+                "username": username,
+                "password": password
+            })
+        })
+            .then(r => r.json())
+            .then(data => {
+                setAuthTokens(data);
+                const userData = jwtDecode(data['access_token']);
+                setUser(userData);
+                localStorage.setItem('authTokens', JSON.stringify(data))
+            })
+    }
+
     const contextData = {
         authTokens: authTokens,
         user: user,
         setAuthTokens: setAuthTokens,
         setUser: setUser,
+        login: login,
         logout: logout
     }
 
