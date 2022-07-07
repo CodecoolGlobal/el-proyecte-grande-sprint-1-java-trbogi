@@ -1,4 +1,4 @@
-import React, {useState, SyntheticEvent} from 'react'
+import {useState} from 'react'
 import {useNavigate} from "react-router-dom";
 
 const Register = () => {
@@ -8,7 +8,7 @@ const Register = () => {
     const [redirect, setRedirect] = useState(false);
     const navigate = useNavigate();
 
-    const submit = (e: SyntheticEvent) => {
+    const submit = (e) => {
         e.preventDefault();
         fetch("http://localhost:8080/api/user/create-user", {
             method: 'POST',
@@ -22,10 +22,6 @@ const Register = () => {
             console.log("status" + r.status);
             setRedirect(true)})
 
-    }
-
-    if (redirect){
-        return navigate("/login")
     }
 
     return (

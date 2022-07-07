@@ -1,10 +1,9 @@
 import './style/main.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Layout from './components/Layout';
+import Home from './components/Home';
 import TimeTable from './components/reservation/TimeTable.js';
 import Shop from './components/shop/Shop.js';
-import Register from './components/user_management/Register';
-import Login from './components/user_management/Login';
 import {AuthProvider} from "./components/context/AuthContext";
 
 function App() {
@@ -13,12 +12,11 @@ function App() {
         <BrowserRouter>
             <AuthProvider>
                 <Layout>
-                        <Routes>
-                            <Route path="/shop" element={<Shop />} />
-                            <Route path="/reservation" element={<TimeTable />} />
-                            <Route path="/register" element={<Register />} />
-                            <Route path="/login" element={<Login />} />
-                        </Routes>
+                    <Routes>
+                        <Route path="/" element={<Home />} />
+                        <Route path="/shop" element={<Shop />} />
+                        <Route path="/reservation" element={<TimeTable />} />
+                    </Routes>
                 </Layout>
             </AuthProvider>
         </BrowserRouter>
