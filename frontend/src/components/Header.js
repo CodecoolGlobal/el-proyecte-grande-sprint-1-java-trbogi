@@ -7,30 +7,29 @@ import Registration from './user_management/Registration';
 
 
 const Header = () => {
-    const {authTokens, setAuthTokens, user, setUser, userId, setUserId, logout} = useContext(AuthContext);
-    const [registrationModalDialogConent, setRegistrationModalDialogConent] = useState("");
-    const [loginModalDialogConent, setLoginModalDialogConent] = useState("");
+    const {user, logout} = useContext(AuthContext);
+    const [registrationModalDialogContent, setRegistrationModalDialogContent] = useState("");
+    const [loginModalDialogContent, setLoginModalDialogContent] = useState("");
 
     return (
         <div>
             <button><Link to="/">Home</Link></button>
             <button><Link to="/shop">Shop</Link></button>
             <button><Link to="/reservation">Reservation</Link></button>
-            <button onClick={() => setRegistrationModalDialogConent(<Registration closeDialog={() => setRegistrationModalDialogConent("")}></Registration>)}>Registration</button>
-            <button onClick={() => setLoginModalDialogConent(<Login closeDialog={() => setLoginModalDialogConent("")}></Login>)}>Login</button>
-            <button id="logout-button">Logout</button>
-
-            <div>{registrationModalDialogConent}</div>
-            <div>{loginModalDialogConent}</div>
-            {user ? (<div>
-                        <span>Welcome {user['sub']}!</span>
-                        <button onClick={() => logout()}>Logout</button>
-                    </div>):
+            {user ?
                 (<>
-                    <button><Link to="/register">Register</Link></button><button><Link to="/login">Login</Link></button>
-                </>)}
+                    <span>Welcome {user['sub']}!</span>
+                    <button onClick={() => logout()}>Logout</button>
+                </>) :
+                (<>
+                    <button onClick={() => setRegistrationModalDialogContent(<Registration closeDialog={() => setRegistrationModalDialogContent("")}></Registration>)}>Registration</button>
+                    <button onClick={() => setLoginModalDialogContent(<Login closeDialog={() => setLoginModalDialogContent("")}></Login>)}>Login</button>
+                    <div>{registrationModalDialogContent}</div>
+                    <div>{loginModalDialogContent}</div>
+                </>)
+            }
         </div>
-    )
+         )
 }
 
 export default Header

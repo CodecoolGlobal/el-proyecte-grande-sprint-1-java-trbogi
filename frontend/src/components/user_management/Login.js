@@ -1,6 +1,5 @@
-import React from 'react';
 import '../../style/modal.css';
-import React, {useContext} from 'react'
+import {useContext} from 'react'
 import {useState} from "react";
 import AuthContext from "../context/AuthContext";
 
@@ -24,11 +23,11 @@ const Login = (props) => {
                         <div id="modal-close" onClick={props.closeDialog}>x</div>
                     </div>
                     <div id="modal-content">
-                        <div><div>E-mail Address:</div><input /></div>
-                        <div><div>Password:</div><input /></div>
+                        <div><div>Username:</div><input type="text" placeholder="Username" onChange={event => setUsername(event.target.value)} /></div>
+                        <div><div>Password:</div><input type="password" placeholder="Password" onChange={event => setPassword(event.target.value)}/></div>
                     </div>
                     <div id="modal-footer">
-                        <div id="modal-button" onSubmit={submit}>Log in</div>
+                        <button id="modal-button" onClick={submit}>Log in</button>
                     </div>
                 </div>
             </div>
