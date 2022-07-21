@@ -1,3 +1,38 @@
+.input-container{
+    position:relative;
+    margin-bottom:30px;
+}
+.input-container label{
+    position:absolute;
+    top:0px;
+    left:0px;
+    font-size: 16px;
+    color: #282c34;
+    pointer-event:none;
+    transition: all 0.5s ease-in-out;
+}
+.input-container input{
+    border:0;
+    border-bottom:1px solid #555;
+    background:transparent;
+    width:100%;
+    padding:8px 0 5px 0;
+    font-size: 16px;
+    color: #282c34;
+}
+
+.input-container input:focus{
+    border:none;
+    outline:none;
+    border-bottom:1px solid #feb934;
+}
+
+.input-container input:focus ~ label, .input-container input:valid ~ label{
+    top:-12px;
+    font-size:16px;
+
+}
+
 #modal-fade {
     background-color: rgba(0, 0, 0, 0.7);
     position: absolute;
@@ -12,56 +47,51 @@
         flex-direction: column;
         position: absolute;
         width: 20%;
-        height: 45%;
-        top: 27.5%;
-        bottom: 27.5%;
+        height: 50%;
+        top: 25%;
+        bottom: 25%;
         left: 40%;
         right: 40%;
-        background-color: transparent;
+        background-image: url("../../public/loginback.png");
+        background-size: 100% 100%;
+        border-radius: 5px;
     }
 
         #modal-header {
-            background-color: #555555;
             padding: 10pt;
             border-top-left-radius: 10pt;
             border-top-right-radius: 10pt;
         }
 
             #modal-title {
-                display: inline-block;
+                display: flex;
+                justify-content: right;
                 background-color: transparent;
                 padding: 5pt 5pt 5pt 5pt;
-                font-size: 18pt;
-                font-weight: bold;
+                font-size: 20pt;
+                font-weight: bolder;
+                color: rgba(28,162,184);
+                letter-spacing: 0.3em;
             }
 
             #modal-close {
                 display: inline-block;
-                float: right;
-                background-color: crimson;
-                font-size: 10pt;
-                font-weight: bolder;
-                text-align: center;
-                width: 18pt;
-                padding: 1pt;
-                border-radius: 5pt;
+                float: left;
+                cursor: pointer;
             }
 
         #modal-content{
             flex: auto;
             height: 80%;
-            padding: 20pt;
+            padding-top: 20pt;
+            padding-right: 20pt;
+            padding-left: 20pt;
             overflow: auto;
-            background-color: #888888;
             text-align: center;
         }
 
-            .modal-input-field-name {
-                width: 200pt;
-            }
 
         #modal-footer{
-            background-color: #555555;
             padding: 10pt;
             border-bottom-left-radius: 10pt;
             border-bottom-right-radius: 10pt;
@@ -70,7 +100,27 @@
 
                 #modal-button{
                     display: inline-block;
-                    background-color: #888888;
-                    padding: 5pt;
-                    border-radius: 5pt;
+                    color: #252537;
+
+                    width: 100%;
+                    height: 50px;
+
+                    margin-top: 8%;
+                    padding: 0 20px;
+                    background: #fff;
+                    border-radius: 5px;
+                    border: none;
+
+
+                    cursor: pointer;
+                    text-align: center;
+                    transition: all 0.2s linear;
+
+                    letter-spacing: 0.2em;
                 }
+
+                #modal-button:hover {
+                    transform: translatey(3px);
+                    box-shadow: none;
+                }
+

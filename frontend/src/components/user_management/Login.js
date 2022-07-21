@@ -1,7 +1,9 @@
 import '../../style/modal.css';
+import {FaUserAlt, FaLock} from 'react-icons/fa'
+import {AiFillCloseCircle} from 'react-icons/ai'
 import {useContext} from 'react'
-import {useState} from "react";
-import AuthContext from "../context/AuthContext";
+import {useState} from 'react';
+import AuthContext from '../context/AuthContext';
 
 const Login = (props) => {
     const {login} = useContext(AuthContext);
@@ -19,14 +21,20 @@ const Login = (props) => {
             <div id="modal-fade">
                 <div id="modal-dialog">
                     <div id="modal-header">
-                        <div id="modal-title">Login</div>
-                        <div id="modal-close" onClick={props.closeDialog}>x</div>
+                        <div id="modal-close" onClick={props.closeDialog}><AiFillCloseCircle size={20}/></div>
+                        <div id="modal-title">LOGIN</div>
                     </div>
                     <div id="modal-content">
-                        <div><div>Username:</div><input type="text" placeholder="Username" onChange={event => setUsername(event.target.value)} /></div>
-                        <div><div>Password:</div><input type="password" placeholder="Password" onChange={event => setPassword(event.target.value)}/></div>
-                    </div>
-                    <div id="modal-footer">
+                        <form>
+                            <div className="input-container">
+                                <input type="text" required=" " onChange={event => setUsername(event.target.value)} />
+                                <label><FaUserAlt/> Username</label>
+                            </div>
+                            <div className="input-container">
+                                <input type="password" required=" " onChange={event => setPassword(event.target.value)}/>
+                                <label><FaLock/> Password</label>
+                            </div>
+                        </form>
                         <button id="modal-button" onClick={submit}>Log in</button>
                     </div>
                 </div>
