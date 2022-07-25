@@ -20,6 +20,7 @@ const Header = () => {
             {user ?
                 (<>
                     <span>Welcome {user['sub']}!</span>
+                    <Link className="link" to="/cart">Cart</Link>
                     <span className="link" onClick={() => logout()}>Logout</span>
                 </>) :
                 (<>
