@@ -1,4 +1,4 @@
-import '../../style/modal.css';
+import '../../style/loginmodal.css';
 import {FaUserAlt, FaLock} from 'react-icons/fa'
 import {AiFillCloseCircle} from 'react-icons/ai'
 import {useContext} from 'react'
@@ -19,10 +19,10 @@ const Login = (props) => {
     return (
         <div id="modal-container">
             <div id="modal-fade">
-                <div id="modal-dialog">
+                <div id="login-modal-dialog">
                     <div id="modal-header">
                         <div id="modal-close" onClick={props.closeDialog}><AiFillCloseCircle size={20}/></div>
-                        <div id="modal-title">LOGIN</div>
+                        <div id="modal-title">Login</div>
                     </div>
                     <div id="modal-content">
                         <form>
