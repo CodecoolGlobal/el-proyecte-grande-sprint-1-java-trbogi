@@ -5,6 +5,7 @@ import Home from './components/Home';
 import TimeTable from './components/reservation/TimeTable.js';
 import Shop from './components/shop/Shop.js';
 import {AuthProvider} from "./components/context/AuthContext";
+import Cart from "./components/cart/Cart";
 
 function App() {
     return (
@@ -16,6 +17,7 @@ function App() {
                         <Route path="/" element={<Home />} />
                         <Route path="/shop" element={<Shop />} />
                         <Route path="/reservation" element={<TimeTable />} />
+                        <Route path="/cart" element={<Cart />} />
                     </Routes>
                 </Layout>
             </AuthProvider>
