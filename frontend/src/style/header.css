@@ -1,0 +1,25 @@
+
+.navbar {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 27px;
+}
+
+.navbar .link {
+    padding: 0.5% 1%;
+    height: 100%;
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 15px;
+    font-weight: bolder;
+    text-decoration: none;
+    text-transform: uppercase;
+    text-align: center;
+    color: aliceblue;
+    letter-spacing: 0.2em;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+}
+
+.link:hover{
+    border-bottom: 2px solid aliceblue;
+}

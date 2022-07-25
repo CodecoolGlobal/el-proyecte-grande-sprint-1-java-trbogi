@@ -4,6 +4,7 @@ import {useContext} from "react";
 import AuthContext from "./context/AuthContext";
 import Login from './user_management/Login';
 import Registration from './user_management/Registration';
+import '../style/header.css';
 
 
 const Header = () => {
@@ -12,18 +13,18 @@ const Header = () => {
     const [loginModalDialogContent, setLoginModalDialogContent] = useState("");
 
     return (
-        <div>
-            <button><Link to="/">Home</Link></button>
-            <button><Link to="/shop">Shop</Link></button>
-            <button><Link to="/reservation">Reservation</Link></button>
+        <div className="navbar">
+            <Link className="link" to="/">Home</Link>
+            <Link className="link" to="/shop">Shop</Link>
+            <Link className="link" to="/reservation">Reservation</Link>
             {user ?
                 (<>
                     <span>Welcome {user['sub']}!</span>
-                    <button onClick={() => logout()}>Logout</button>
+                    <span className="link" onClick={() => logout()}>Logout</span>
                 </>) :
                 (<>
-                    <button onClick={() => setRegistrationModalDialogContent(<Registration closeDialog={() => setRegistrationModalDialogContent("")}></Registration>)}>Registration</button>
-                    <button onClick={() => setLoginModalDialogContent(<Login closeDialog={() => setLoginModalDialogContent("")}></Login>)}>Login</button>
+                    <span className="link" onClick={() => setRegistrationModalDialogContent(<Registration closeDialog={() => setRegistrationModalDialogContent("")}></Registration>)}>Registration</span>
+                    <span className="link" onClick={() => setLoginModalDialogContent(<Login closeDialog={() => setLoginModalDialogContent("")}></Login>)}>Login</span>
                     <div>{registrationModalDialogContent}</div>
                     <div>{loginModalDialogContent}</div>
                 </>)

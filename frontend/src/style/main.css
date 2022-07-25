@@ -48,13 +48,11 @@ body{
     background-color: #feb934;
     height: 1.8rem;
     font-size: 1.4rem;
-    font-weight: bold;
 }
 
 .slots .day-text{
     height: 1.4rem;
     background-color: #fede95;
-    font-weight: bold;
 }
 
 .slots p{
@@ -73,7 +71,6 @@ body{
 }
 
 .courts span{
-    font-weight: 900;
     padding: 1% 5%;
     margin-bottom: 1%;
     margin-top: 1%;
@@ -110,7 +107,6 @@ body{
     height: 40px;
     width: 100px;
     text-align: center;
-    font-weight: bold;
 }
 
 .right {

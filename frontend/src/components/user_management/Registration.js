@@ -1,6 +1,7 @@
 import React from 'react';
 import '../../style/modal.css';
 import {useState} from "react";
+import {AiFillCloseCircle} from "react-icons/ai";
 
 const Register = (props) => {
     const [username, setUsername] = useState("");
@@ -30,7 +31,7 @@ const Register = (props) => {
                 <div id="modal-dialog">
                     <div id="modal-header">
                         <div id="modal-title">Registration</div>
-                        <div id="modal-close" onClick={props.closeDialog}>x</div>
+                        <div id="modal-close" onClick={props.closeDialog}><AiFillCloseCircle size={20}/></div>
                     </div>
                     <div id="modal-content">
                         <div><div>Username:</div><input type="text" placeholder="Username" onChange={event => setUsername(event.target.value)} /></div>

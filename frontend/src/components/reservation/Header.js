@@ -4,7 +4,7 @@ function Header({yearAndMonth, directionOfSwipe}) {
     return(
         <div>
             <Courts></Courts>
-            <div className={directionOfSwipe} style={{fontSize: '1.8rem', fontWeight: '900', textAlign: 'center'}}>{yearAndMonth}</div>
+            <div className={directionOfSwipe} style={{fontSize: '1.8rem', textAlign: 'center'}}>{yearAndMonth}</div>
         </div>
     )
 }
