@@ -1,6 +1,7 @@
 import {useEffect, useState} from "react";
 import {useContext} from "react";
 import AuthContext from "../context/AuthContext";
+import ReservationCard from "./ReservationCard";
 
 const Cart = () => {
     const [reservations, setReservations] = useState([]);
@@ -18,7 +19,9 @@ const Cart = () => {
 
     return (
         <div>
-            {0 < reservations.length  && <span>ok</span>}
+            {0 < reservations.length  &&
+                reservations.map(reservation => {
+                return <ReservationCard reservation={reservation}/>})}
         </div>
     )
 }
