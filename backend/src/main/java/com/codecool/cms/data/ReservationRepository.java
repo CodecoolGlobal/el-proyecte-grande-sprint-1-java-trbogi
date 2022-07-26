@@ -10,4 +10,6 @@ import java.util.UUID;
 public interface ReservationRepository extends JpaRepository<Reservation, UUID> {
     List<Reservation> findByCourtNumberAndStartTimeBetween(int courtNumber, LocalDateTime monday, LocalDateTime nextMonday);
 
+    @Override
+    List<Reservation> findAllById(Iterable<UUID> uuids);
 }
