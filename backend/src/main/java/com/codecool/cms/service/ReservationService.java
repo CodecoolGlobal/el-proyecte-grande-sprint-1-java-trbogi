@@ -40,4 +40,7 @@ public class ReservationService {
         return reservation;
     }
 
+    public List<Reservation> getReservationsByIds(Iterable<UUID> uuids){
+        return reservationRepository.findAllById(uuids);
+    }
 }
