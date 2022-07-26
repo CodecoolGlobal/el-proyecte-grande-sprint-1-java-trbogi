@@ -1,0 +1,53 @@
+.cards-container{
+    display: flex;
+    justify-content: center;
+}
+
+.cards{
+    width: 25%;
+}
+
+.card{
+    width: 100%;
+    color: #282c34;
+    background: #fff;
+    margin: 4%;
+    border-radius: 3px;
+    padding: 15px 0 0 0;
+    letter-spacing: 0.06em;
+    animation: 3s anim-swipeLeft ease-out;
+}
+
+.card span{
+    font-size: 20px;
+    font-weight: bold;
+    float: right;
+    padding-right: 6%;
+}
+
+.card p{
+    padding-left: 20px;
+}
+
+.price-tag-container{
+    background-color: rgba(28,162,184);
+    display: flex;
+    justify-content: flex-end;
+}
+.price{
+    margin: 0;
+    text-align: right;
+    width: 40%;
+    background-color: #feb934;
+    padding: 5% 3% 3% 3%;
+    border-bottom-right-radius: 3px;
+    font-weight: bold;
+}
+
+.cancel-btn{
+    background-color: lightgrey;
+    padding-top: 3%;
+    margin: 0;
+    border-bottom-left-radius: 3px;
+    padding-left: 0 !important;
+}

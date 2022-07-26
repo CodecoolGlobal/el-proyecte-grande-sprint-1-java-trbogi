@@ -18,10 +18,12 @@ const Cart = () => {
     }, []);
 
     return (
-        <div>
-            {0 < reservations.length  &&
-                reservations.map(reservation => {
-                return <ReservationCard reservation={reservation}/>})}
+        <div className="cards-container">
+            <div className="cards">
+                {0 < reservations.length  &&
+                    reservations.map(reservation => {
+                        return <ReservationCard reservation={reservation}/>})}
+            </div>
         </div>
     )
 }
