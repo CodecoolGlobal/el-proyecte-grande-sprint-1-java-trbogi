@@ -36,4 +36,10 @@ public class CartService {
         cart.setReservations(reservations);
         cartRepository.save(cart);
     }
+
+    public List<Object> getReservationsFromCartByUserId(UUID userId){
+        User user = userRepository.getById(userId);
+        Cart cart = cartRepository.getCartByUser(user);
+        return cartRepository.getReservationsFromCart(cart.getId());
+    }
 }
