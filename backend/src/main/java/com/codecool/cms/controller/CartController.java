@@ -1,15 +1,18 @@
 package com.codecool.cms.controller;
 
-import com.codecool.cms.model.Cart;
 import com.codecool.cms.model.Reservation;
 import com.codecool.cms.service.CartService;
+import com.codecool.cms.service.ReservationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @CrossOrigin(origins = "http://localhost:3000/")
 @RestController
@@ -19,10 +22,20 @@ public class CartController {
     @Autowired
     CartService cartService;
 
-    // Get cart content
-    @GetMapping("get-cart/{userId}")
-    public Cart getCartContentByUserId(@PathVariable String userId) {
-        return null;
+    @Autowired
+    ReservationService reservationService;
+
+    // Get cart content: reservations
+    @GetMapping("get-cart-reservations/{userId}")
+    public List<Reservation> getReservationsFromCartByUserId(@PathVariable UUID userId) {
+        List<Object> ids = cartService.getReservationsFromCartByUserId(userId);
+        List<UUID> uuids = new ArrayList<>();
+        for (Object e : ids) {
+            String s = (String) e;
+            UUID uuid = UUID.fromString(s);
+            uuids.add(uuid);
+        }
+        return reservationService.getReservationsByIds(uuids);
     }
 
     // Empty cart
