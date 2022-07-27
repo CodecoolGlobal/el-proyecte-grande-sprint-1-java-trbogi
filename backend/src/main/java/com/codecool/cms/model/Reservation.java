@@ -28,37 +28,29 @@ public class Reservation {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
     private LocalDateTime endTime;
 
-    @Column(
-            nullable = true
-    )
-    private int participantLimit;
-
     @OneToOne
     private User coach;
-    private BigDecimal price;
 
-    @ElementCollection
-    @JoinTable(name="participants_payment", joinColumns=@JoinColumn(name="id"))
-    @MapKeyColumn (name="user")
-    @Column(name="payment_status")
-    private Map<User, Boolean> participants;
+    @OneToOne
+    private User user;
+    private BigDecimal price;
+    private Boolean paid;
 
     // Constructor(s)
-    public Reservation(UUID id, int courtNumber, LocalDateTime start, LocalDateTime end, int participantLimit, BigDecimal price) {
+    public Reservation(UUID id, int courtNumber, LocalDateTime start, LocalDateTime end, BigDecimal price) {
         this.id = id;
         this.courtNumber = courtNumber;
         this.startTime = start;
         this.endTime = end;
-        this.participantLimit = participantLimit;
         this.price = price;
     }
 
-    public Reservation(int courtNumber, LocalDateTime start, Map<User, Boolean> participants) {
+    public Reservation(int courtNumber, LocalDateTime start, User user) {
         this.courtNumber = courtNumber;
         this.startTime = start;
         setEndTime();
         this.price = DEFAULT_PRICE;
-        this.participants = participants;
+        this.user = user;
     }
 
 
@@ -67,12 +59,12 @@ public class Reservation {
     }
 
     // Getter(s), Setter(s)
-    public Map<User, Boolean> getParticipants() {
-        return participants;
+    public User getUser() {
+        return user;
     }
 
-    public void setParticipants(Map<User, Boolean> participants) {
-        this.participants = participants;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public void setId(UUID id){
@@ -109,14 +101,6 @@ public class Reservation {
 
     public void setEndTime() {
         this.endTime = startTime.plusHours(DEFAULT_INTERVAL_IN_HOURS);
-    }
-
-    public int getParticipantLimit() {
-        return participantLimit;
-    }
-
-    public void setParticipantLimit(int participantLimit) {
-        this.participantLimit = participantLimit;
     }
 
     public User getCoach() {
