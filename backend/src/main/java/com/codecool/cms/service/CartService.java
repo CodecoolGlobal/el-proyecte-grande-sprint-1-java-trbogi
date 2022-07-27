@@ -42,4 +42,8 @@ public class CartService {
         Cart cart = cartRepository.getCartByUser(user);
         return cartRepository.getReservationsFromCart(cart.getId());
     }
+
+    public void removeReservationFromCart(UUID reservationId){
+        cartRepository.removeReservationById(reservationId);
+    }
 }

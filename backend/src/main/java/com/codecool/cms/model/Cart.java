@@ -22,7 +22,7 @@ public class Cart {
     @CollectionTable(name = "cart_content")
     @Column(name = "quantity")
     Map<Product, Integer> products = new HashMap<>();
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     List<Reservation> reservations;
 
     // Constructor(s)

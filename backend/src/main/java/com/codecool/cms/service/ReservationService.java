@@ -43,4 +43,8 @@ public class ReservationService {
     public List<Reservation> getReservationsByIds(Iterable<UUID> uuids){
         return reservationRepository.findAllById(uuids);
     }
+
+    public void removeReservation(UUID reservationId){
+        reservationRepository.deleteById(reservationId);
+    }
 }

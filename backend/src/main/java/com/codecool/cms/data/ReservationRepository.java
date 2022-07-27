@@ -12,4 +12,6 @@ public interface ReservationRepository extends JpaRepository<Reservation, UUID> 
 
     @Override
     List<Reservation> findAllById(Iterable<UUID> uuids);
+
+    void deleteById(UUID reservationId);
 }
