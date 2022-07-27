@@ -1,5 +1,6 @@
 package com.codecool.cms.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -9,6 +10,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.UUID;
 
+@JsonIgnoreProperties({"hibernateLazyInitializer"})
 @Entity(name = "users")
 public class User implements UserDetails {
 
