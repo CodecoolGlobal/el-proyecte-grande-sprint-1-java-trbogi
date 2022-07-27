@@ -33,9 +33,7 @@ public class ReservationService {
 
     public Reservation createReservation(UUID userId, LocalDateTime startTime, int courtNumber){
         User user = userRepository.getById(userId);
-        Map<User, Boolean> participants = new HashMap<>();
-        participants.put(user, false);
-        Reservation reservation = new Reservation(courtNumber, startTime, participants);
+        Reservation reservation = new Reservation(courtNumber, startTime, user);
         reservationRepository.save(reservation);
         return reservation;
     }
