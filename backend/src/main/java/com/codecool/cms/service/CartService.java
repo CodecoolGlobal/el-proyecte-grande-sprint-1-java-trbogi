@@ -46,4 +46,9 @@ public class CartService {
     public void removeReservationFromCart(UUID reservationId){
         cartRepository.removeReservationById(reservationId);
     }
+
+    public void removeAllReservationsByUserId(UUID userId){
+        UUID cartId = cartRepository.getCartByUser(userRepository.getById(userId)).getId();
+        cartRepository.removeAllReservations(cartId);
+    }
 }

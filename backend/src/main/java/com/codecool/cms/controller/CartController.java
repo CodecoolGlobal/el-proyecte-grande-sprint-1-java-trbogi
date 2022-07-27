@@ -62,8 +62,10 @@ public class CartController {
     }
 
     // Delete all court reservation from cart
-    @DeleteMapping ("delete-all-court-reservation/{cartId}")
-    public void removeAllCourtReservationFromCart(@PathVariable String cartId) {
+    @DeleteMapping ("delete-all-court-reservation/{userId}")
+    public void removeAllCourtReservationFromCart(@PathVariable UUID userId) {
+        cartService.removeAllReservationsByUserId(userId);
+        reservationService.removeALlReservationByUserId(userId);
     }
 
     // Remove all practice reservation from cart

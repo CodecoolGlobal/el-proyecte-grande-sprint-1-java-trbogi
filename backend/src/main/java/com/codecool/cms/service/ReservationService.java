@@ -45,4 +45,9 @@ public class ReservationService {
     public void removeReservation(UUID reservationId){
         reservationRepository.deleteById(reservationId);
     }
+
+    public void removeALlReservationByUserId(UUID userId){
+        reservationRepository.deleteAllByUserId(userId);
+    }
+
 }

@@ -23,4 +23,9 @@ public interface CartRepository extends JpaRepository<Cart, UUID> {
     @Query(value = "DELETE FROM cart_reservations\n" +
             "WHERE reservations_id = ?1", nativeQuery = true)
     void removeReservationById(UUID reservationId);
+
+    @Modifying
+    @Query(value = "DELETE FROM cart_reservations\n" +
+            "WHERE cart_id = ?1", nativeQuery = true)
+    void removeAllReservations(UUID cartId);
 }
