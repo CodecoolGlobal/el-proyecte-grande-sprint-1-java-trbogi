@@ -38,6 +38,21 @@ public class CartController {
         return reservationService.getReservationsByIds(uuids);
     }
 
+
+    @GetMapping("get-cart-reservations/{userId}/{courtNumber}")
+    public List<Reservation> getReservationsFromCartByUserIdAndCourtNumber(@PathVariable UUID userId, @PathVariable int courtNumber) {
+        List<Object> ids = cartService.getReservationsFromCartByUserId(userId);
+        List<UUID> uuids = new ArrayList<>();
+        for (Object e : ids) {
+            String s = (String) e;
+            UUID uuid = UUID.fromString(s);
+            uuids.add(uuid);
+        }
+        return reservationService.getReservationsByIds(uuids).stream()
+                .filter(reservation -> reservation.getCourtNumber() == courtNumber)
+                .collect(Collectors.toList());
+    }
+
     // Empty cart
     @DeleteMapping("empty-cart/{cartId}")
     public void emptyCart(@PathVariable String cartId) {
