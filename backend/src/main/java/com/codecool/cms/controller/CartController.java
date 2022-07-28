@@ -60,13 +60,13 @@ public class CartController {
 
     // Add reservation (court, practice) to cart
     @PostMapping ("add-reservation")
-    public void addReservationToCart(@RequestBody Map<String, String> reservationInfo) {
+    public UUID addReservationToCart(@RequestBody Map<String, String> reservationInfo) {
         UUID bookingUserId = UUID.fromString(reservationInfo.get("userId"));
         String start = reservationInfo.get("startTime");
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         LocalDateTime startTime = LocalDateTime.parse(start, formatter);
         int courtNumber = Integer.parseInt(reservationInfo.get("courtNumber"));
-        cartService.addReservationToCart(bookingUserId, startTime, courtNumber);
+        return cartService.addReservationToCart(bookingUserId, startTime, courtNumber);
     }
 
     // Delete reservation (court, practice) from cart

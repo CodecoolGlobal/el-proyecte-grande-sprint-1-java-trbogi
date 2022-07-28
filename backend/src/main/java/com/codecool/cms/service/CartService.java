@@ -28,13 +28,14 @@ public class CartService {
         cartRepository.save(new Cart(user));
     }
 
-    public void addReservationToCart(UUID userId, LocalDateTime startTime, int courtNumber){
+    public UUID addReservationToCart(UUID userId, LocalDateTime startTime, int courtNumber){
         Reservation reservation = reservationService.createReservation(userId, startTime, courtNumber);
         Cart cart = cartRepository.getCartByUser(userRepository.getById(userId));
         List<Reservation> reservations = cart.getReservations();
         reservations.add(reservation);
         cart.setReservations(reservations);
         cartRepository.save(cart);
+        return reservation.getId();
     }
 
     public List<Object> getReservationsFromCartByUserId(UUID userId){
