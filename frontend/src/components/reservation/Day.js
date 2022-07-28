@@ -16,7 +16,7 @@ function Day(props) {
                     <p className="day-number"><Moment format={"DD"}>{props.day}</Moment></p>
                     <p className="day-text"><Moment format={"dddd"}>{props.day}</Moment></p>
                     {slots.map((slot) => {
-                        return <TimeSlot key={dayAsString + slot} day={dayAsString} start={slot} reservations={props.reservations} setReservations={props.setReservations} reservationsInCart={props.reservationsInCart} setReservationsInCart={props.setReservationsInCart}/>
+                        return <TimeSlot key={dayAsString + slot} day={dayAsString} start={slot} />
                     })}
             </div>
         </>

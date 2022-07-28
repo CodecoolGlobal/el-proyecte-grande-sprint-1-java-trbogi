@@ -4,6 +4,7 @@ import {FaAngleLeft, FaAngleRight} from "react-icons/fa";
 import moment from "moment";
 import {useEffect, useState, createContext, useContext} from "react";
 import AuthContext from "../context/AuthContext";
+import ReservationsContext from "../context/ReservationsContext";
 
 export const CourtContext = createContext("1");
 
@@ -18,35 +19,12 @@ function TimeTable() {
     const sunday = startOfWeek.clone().add(6, 'days');
     const [days, setDays] = useState([monday, tuesday, wednesday, thursday, friday, saturday, sunday]);
     const [directionOfSwipe, setDirectionOfSwipe] = useState("right");
-    const [reservations, setReservations] = useState([]);
-    const [reservationsInCart, setReservationsInCart] = useState([]);
     const [court, setCourt] = useState("1");
     const {user} = useContext(AuthContext);
+    const {getReservations, getReservationsInCartByCourt} = useContext(ReservationsContext);
 
     useEffect(() => getReservations(court, days[0].format("yyyy-MM-DD")),[court])
-    useEffect(() => getReservationsInCartByCourt(), [court])
-
-    const getReservations = (courtNumber, startOfWeek) => {
-        fetch(`http://localhost:8080/api/reservation/get-reservation/${courtNumber}/${startOfWeek}`, {
-        })
-            .then(response => response.json())
-            .then(data => {
-                console.log('Success: Reservations', data);
-                setReservations(data)
-            })
-    }
-
-    const getReservationsInCartByCourt = () => {
-        if (user){
-            fetch(`http://localhost:8080/api/cart/get-cart-reservations/${user['userId']}/${court}`, {
-            })
-                .then(response => response.json())
-                .then(data => {
-                    console.log('Success: Reservations in cart:', data);
-                    setReservationsInCart(data);
-                })
-        }
-    }
+    useEffect(() => getReservationsInCartByCourt(user, court), [court])
 
 
     const isCurrentWeek = () => {
@@ -66,27 +44,27 @@ function TimeTable() {
 
     return(
         <CourtContext.Provider value={[court, setCourt]}>
-            <div className="container" >
-                <div className="timetable-container-with-arrows">
-                    <div className="left-side">
-                        <div className="times">
-                            <p>08:00 - 10:00</p>
-                            <p>10:00 - 12:00</p>
-                            <p>12:00 - 14:00</p>
-                            <p>14:00 - 16:00 </p>
-                            <p>16:00 - 18:00</p>
-                            <p>18:00 - 20:00</p>
+                <div className="container" >
+                    <div className="timetable-container-with-arrows">
+                        <div className="left-side">
+                            <div className="times">
+                                <p>08:00 - 10:00</p>
+                                <p>10:00 - 12:00</p>
+                                <p>12:00 - 14:00</p>
+                                <p>14:00 - 16:00 </p>
+                                <p>16:00 - 18:00</p>
+                                <p>18:00 - 20:00</p>
+                            </div>
                         </div>
-                    </div>
-                    <FaAngleLeft size={40} visibility={isCurrentWeek() ? "hidden":"visible"} onClick={() => turnPage(-1)}/>
-                    <div className="timetable">
-                        <Header directionOfSwipe={directionOfSwipe} yearAndMonth={days[0].format("YYYY. MMMM")}/>
-                        <Week directionOfSwipe={directionOfSwipe} days={days} reservations={reservations} setReservations={setReservations} reservationsInCart={reservationsInCart} setReservationsInCart={setReservationsInCart}/>
-                    </div>
-                    <FaAngleRight size={40} onClick={() => turnPage(1)}/>
+                        <FaAngleLeft size={40} visibility={isCurrentWeek() ? "hidden":"visible"} onClick={() => turnPage(-1)}/>
+                        <div className="timetable">
+                            <Header directionOfSwipe={directionOfSwipe} yearAndMonth={days[0].format("YYYY. MMMM")}/>
+                            <Week directionOfSwipe={directionOfSwipe} days={days}/>
+                        </div>
+                        <FaAngleRight size={40} onClick={() => turnPage(1)}/>
 
+                    </div>
                 </div>
-            </div>
         </CourtContext.Provider>
     )
 }

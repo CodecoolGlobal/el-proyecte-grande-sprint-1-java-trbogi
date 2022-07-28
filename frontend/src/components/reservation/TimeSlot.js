@@ -3,17 +3,19 @@ import {useContext, useEffect, useState} from "react";
 import moment from "moment";
 import {CourtContext} from "./TimeTable";
 import AuthContext from "../context/AuthContext";
+import ReservationsContext from "../context/ReservationsContext";
 
 function TimeSlot(props) {
     const {authTokens, user} = useContext(AuthContext);
     const [courtContext, ] = useContext(CourtContext);
     const slotsStartTime = props.day+ " "+  props.start;
-    const [inCart, setInCart] = useState(false);
     const isPast = moment(slotsStartTime).isBefore(moment());
     const [currentReservation, setCurrentReservation] = useState(null);
+    const {reservations, reservationsInCart, getReservationsInCartByCourt, removeReservationFromCart} = useContext(ReservationsContext);
+
 
     const isReserved = () => {
-        for (const reservation of props.reservations) {
+        for (const reservation of reservations) {
             const timeData = reservation.startTime.split(" ");
             const reservationDate = timeData[0];
             const reservationStart = timeData[1]
@@ -25,7 +27,7 @@ function TimeSlot(props) {
     }
 
     const isInCart = () => {
-        for (const reservation of props.reservationsInCart) {
+        for (const reservation of reservationsInCart) {
             const timeData = reservation.startTime.split(" ");
             const reservationDate = timeData[0];
             const reservationStart = timeData[1];
@@ -36,7 +38,7 @@ function TimeSlot(props) {
         return false;
     }
 
-    const addReservationToCart = (e) => {
+    const addReservationToCart = () => {
         if (!user){
             alert("Please log in to book a court!")
             return;
@@ -53,6 +55,7 @@ function TimeSlot(props) {
             .then(response =>{
                 if (response.ok){
                     console.log('Success: put in cart')
+                    getReservationsInCartByCourt(user,courtContext);
                     response.json()
                         .then(r => setCurrentReservation(r));
                 }
@@ -62,28 +65,8 @@ function TimeSlot(props) {
             });
     }
 
-    const removeReservationFromCart = () => {
-            fetch(`http://localhost:8080/api/cart/delete-reservation/${currentReservation}`, {
-                method: 'DELETE',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Access-Control-Allow-Origin': '*',
-                    //'Authentication': 'Bearer ' + authTokens['access_token']
-                },
-            })
-                .then(response =>{
-                    if (response.ok){
-                        console.log('Delete was successful');
-                        setInCart(false);
-                    }
-                })
-                .catch((error) => {
-                    console.error('Error:', error);
-                });
-    }
-
     useEffect(() =>{
-        for (const reservation of props.reservationsInCart) {
+        for (const reservation of reservationsInCart) {
             const timeData = reservation.startTime.split(" ");
             const reservationDate = timeData[0];
             const reservationStart = timeData[1];
@@ -97,7 +80,7 @@ function TimeSlot(props) {
     if (isReserved()){
         return(<p style={{backgroundColor: "#fcb7b4"}}>{props.start}</p>)
     }else if(isInCart()) {
-        return (<p style={{backgroundColor: "#CED9FF"}} onClick={removeReservationFromCart}>{props.start} <br/>
+        return (<p style={{backgroundColor: "#CED9FF"}} onClick={() => removeReservationFromCart(currentReservation, user, courtContext)}>{props.start} <br/>
             <BsBagDash/></p>)
     }else if(isPast){
             return (<p style={{backgroundColor: "rgb(211, 211, 211, 0.8)"}}/>)
