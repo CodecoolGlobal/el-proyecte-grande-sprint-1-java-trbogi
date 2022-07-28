@@ -1,11 +1,12 @@
 import './style/main.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Layout from './components/Layout';
-import Home from './components/Home';
-import TimeTable from './components/reservation/TimeTable.js';
-import Shop from './components/shop/Shop.js';
-import {AuthProvider} from "./components/context/AuthContext";
+import Home from "./components/Home";
+import Shop from "./components/shop/Shop";
+import TimeTable from "./components/reservation/TimeTable";
 import Cart from "./components/cart/Cart";
+import {AuthProvider} from "./components/context/AuthContext";
+import Layout from "./components/Layout";
+
 
 function App() {
     return (
