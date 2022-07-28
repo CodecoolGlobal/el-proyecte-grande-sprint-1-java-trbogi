@@ -43,6 +43,7 @@ public class Reservation {
         this.startTime = start;
         this.endTime = end;
         this.price = price;
+        this.paid = false;
     }
 
     public Reservation(int courtNumber, LocalDateTime start, User user) {
@@ -51,6 +52,7 @@ public class Reservation {
         setEndTime();
         this.price = DEFAULT_PRICE;
         this.user = user;
+        this.paid = false;
     }
 
 
@@ -119,4 +121,11 @@ public class Reservation {
         this.price = price;
     }
 
+    public Boolean getPaid() {
+        return paid;
+    }
+
+    public void setPaid(Boolean paid) {
+        this.paid = paid;
+    }
 }
