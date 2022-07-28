@@ -1,9 +1,9 @@
 import Day from "./Day";
 
-function Week({days, reservations, directionOfSwipe}) {
+function Week(props) {
     return (
         <div className="days">
-            {days.map((day) =>{return <Day key={day} day={day} reservations={reservations} directionOfSwipe={directionOfSwipe}></Day>})}
+            {props.days.map((day) => {return <Day key={day} day={day} reservations={props.reservations} setReservations={props.setReservations} reservationsInCart={props.reservationsInCart} setRservationsInCart={props.setReservationsInCart} directionOfSwipe={props.directionOfSwipe}/>})}
         </div>
     );
 }
