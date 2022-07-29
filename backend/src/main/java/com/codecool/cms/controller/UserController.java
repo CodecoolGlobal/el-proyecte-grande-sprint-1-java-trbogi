@@ -31,6 +31,7 @@ public class UserController {
     // Modify user data
     @PatchMapping("modify-user/{userID}")
     public void modifyUserByUserId(@PathVariable UUID userID, @RequestBody User modifiedUserData) {
+        System.out.println(modifiedUserData);
         userService.modifyUserByUserId(userID, modifiedUserData);
     }
 

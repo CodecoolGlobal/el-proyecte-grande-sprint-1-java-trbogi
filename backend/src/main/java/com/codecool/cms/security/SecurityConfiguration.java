@@ -34,10 +34,15 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         JWTAuthenticationFilter jwtAuthenticationFilter = new JWTAuthenticationFilter(authenticationManager());
         jwtAuthenticationFilter.setFilterProcessesUrl("/api/user/login");
         http.csrf().disable();
-        http.cors().configurationSource(request -> new CorsConfiguration().applyPermitDefaultValues());
+        CorsConfiguration corsConfiguration = new CorsConfiguration();
+        corsConfiguration.applyPermitDefaultValues();
+        corsConfiguration.addAllowedMethod("DELETE");
+        corsConfiguration.addAllowedMethod("PATCH");
+        http.cors().configurationSource(request -> corsConfiguration);
         http.authorizeRequests()
                 .antMatchers(HttpMethod.GET, "/api/user/**").permitAll()
                 .antMatchers(HttpMethod.POST, "/api/user/**").permitAll()
+                .antMatchers(HttpMethod.PATCH, "/api/user/**").permitAll()
                 .antMatchers(HttpMethod.GET, "/api/reservation/**").permitAll()
                 .antMatchers(HttpMethod.POST, "/api/reservation/**").hasRole(UserRole.MEMBER.name())
                 .and()

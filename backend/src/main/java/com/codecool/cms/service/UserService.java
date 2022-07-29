@@ -43,8 +43,32 @@ public class UserService implements UserDetailsService {
         boolean userIdExistsInDatabase = userRepository.existsById(id);
         if (authenticatedUserIdAndModifiedUserIdEquals && userIdExistsInDatabase) {
             User existingUser = userRepository.getById(id);
-            modifiedUserData.setEnabled(existingUser.getEnabled());
-            if (existingUser.getAddress() == null) {
+
+            if (modifiedUserData.getUsername().equals("")) {
+                modifiedUserData.setUsername(existingUser.getUsername());
+            }
+            if (modifiedUserData.getEmail() == null) {
+                modifiedUserData.setEmail(existingUser.getEmail());
+            }
+            if (modifiedUserData.getPhone() == null) {
+                modifiedUserData.setPhone(existingUser.getPhone());
+            }
+            if (modifiedUserData.getPhone() == null) {
+                modifiedUserData.setPhone(existingUser.getPhone());
+            }
+            if (modifiedUserData.getPassword() == null) {
+                modifiedUserData.setPassword(existingUser.getPassword());
+            }
+            if (modifiedUserData.getRole() == null) {
+                modifiedUserData.setRole(existingUser.getRole());
+            }
+            if (modifiedUserData.getEnabled() == false) {
+                modifiedUserData.setEnabled(existingUser.getEnabled());
+            }
+            if (modifiedUserData.getProfilePicture() == null) {
+                modifiedUserData.setProfilePicture(existingUser.getProfilePicture());
+            }
+            if (modifiedUserData.getAddress() != null) {
                 Address modifiedAddress = modifiedUserData.getAddress();
                 Address newAddress = addressRepository.save(modifiedAddress);
                 modifiedUserData.setAddress(newAddress);

@@ -19,7 +19,7 @@ const Header = () => {
             <Link className="link" to="/reservation">Reservation</Link>
             {user ?
                 (<>
-                    <span>Welcome {user['sub']}!</span>
+                    <Link className="link" to="/profile">Profile</Link>
                     <span className="link" onClick={() => logout()}>Logout</span>
                 </>) :
                 (<>

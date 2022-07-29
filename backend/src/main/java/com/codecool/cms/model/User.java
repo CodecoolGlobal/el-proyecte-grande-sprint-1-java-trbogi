@@ -18,7 +18,7 @@ public class User implements UserDetails {
         @Column(name = "id") @Id @GeneratedValue(strategy = GenerationType.AUTO) private UUID id;
         @Column(name = "username") private String username;
         @Column(name = "email") private String email;
-        @Column(name = "phone") private Integer phone;
+        @Column(name = "phone") private String phone;
         @Column(name = "password") private String password;
         @Column(name = "role") @Enumerated(EnumType.STRING) private UserRole role;
         @Column(name = "enabled") private boolean enabled;
@@ -89,15 +89,15 @@ public class User implements UserDetails {
             this.email = email;
         }
 
-        public Integer getPhone() {
+        public String getPhone() {
             return phone;
         }
 
-        public void setPhone(Integer phone) {
+        public void setPhone(String phone) {
             this.phone = phone;
         }
 
-        public void setPassword(String password) {
+    public void setPassword(String password) {
             this.password = password;
         }
 
@@ -138,11 +138,12 @@ public class User implements UserDetails {
         public String toString() {
             return "User{" +
                     "id=" + id +
-                    ", name='" + username + '\'' +
+                    ", username='" + username + '\'' +
                     ", email='" + email + '\'' +
                     ", phone=" + phone +
                     ", password='" + password + '\'' +
                     ", role=" + role +
+                    ", enabled=" + enabled +
                     ", profilePicture='" + profilePicture + '\'' +
                     ", address=" + address +
                     '}';

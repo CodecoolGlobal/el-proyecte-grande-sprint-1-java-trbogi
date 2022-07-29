@@ -1,0 +1,19 @@
+#profile-container {
+    display: flex;
+    flex-direction: column;
+    row-gap: 20pt;
+}
+
+    #profile-user, #profile-address, #profile-password-change {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .profile-label {
+        font-weight: bold;
+    }
+
+    #profile-username, #profile-email, #profile-phone {
+        text-align: center;
+    }
