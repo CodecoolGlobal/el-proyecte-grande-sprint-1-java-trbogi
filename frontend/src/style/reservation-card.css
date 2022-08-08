@@ -107,5 +107,9 @@
 
 .go-to-checkout-btn{
     background-color: rgba(20, 141, 167, 0.85);
+}
+
+.go-to-checkout-btn .checkout-link{
     color: #ffffff;
+    text-decoration: none;
 }

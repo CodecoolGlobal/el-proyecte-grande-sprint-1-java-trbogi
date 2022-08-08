@@ -1,6 +1,7 @@
 import {useContext, useEffect, useState} from "react";
 import AuthContext from "../context/AuthContext";
 import ReservationCard from "./ReservationCard";
+import { Link } from "react-router-dom";
 
 const Cart = () => {
     const [reservations, setReservations] = useState([]);
@@ -53,7 +54,7 @@ const Cart = () => {
                             <p>Total Price: <label className="total-price">{totalPrice()} HUF</label></p>
                             <div>
                                 <span className="delete-all-btn" onClick={() => deleteAllReservations()}>Delete All</span>
-                                <span className="go-to-checkout-btn">Go To Checkout</span>
+                                <span className="go-to-checkout-btn"><Link className="checkout-link" to="/checkout">Go To Checkout</Link></span>
                             </div>
                         </>
                     }
