@@ -7,6 +7,7 @@ import Cart from "./components/cart/Cart";
 import {AuthProvider} from "./components/context/AuthContext";
 import Layout from "./components/Layout";
 import {ReservationProvider} from "./components/context/ReservationsContext";
+import Checkout from "./components/checkout/Checkout";
 
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
                             <Route path="/shop" element={<Shop />} />
                             <Route path="/reservation" element={<TimeTable />} />
                             <Route path="/cart" element={<Cart />} />
+                            <Route path="/checkout" element={<Checkout />} />
                         </Routes>
                     </Layout>
                 </ReservationProvider>
