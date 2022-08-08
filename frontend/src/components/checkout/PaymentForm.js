@@ -4,11 +4,13 @@ import {
     PaymentElement
 } from '@stripe/react-stripe-js'
 import {useEffect, useState} from "react";
+import '../../style/checkout.css'
 
 const PaymentForm = () => {
     const stripe = useStripe();
     const elements = useElements();
 
+    const [email, setEmail] = useState('');
     const [message, setMessage] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
 
@@ -59,6 +61,7 @@ const PaymentForm = () => {
             confirmParams: {
                 // Make sure to change this to your payment completion page
                 return_url: "http://localhost:3000",
+                receipt_email: email,
             },
         });
 
@@ -77,16 +80,26 @@ const PaymentForm = () => {
     };
 
     return (
-        <form id="payment-form" onSubmit={handleSubmit}>
-            <PaymentElement id="payment-element" />
-            <button disabled={isLoading || !stripe || !elements} id="submit">
-        <span id="button-text">
-          {isLoading ? <div className="spinner" id="spinner"></div> : "Pay now"}
-        </span>
-            </button>
-            {/* Show any error or success messages */}
-            {message && <div id="payment-message">{message}</div>}
-        </form>
+        <div className="checkout-container">
+            <h1>Checkout</h1>
+            <form id="payment-form" onSubmit={handleSubmit}>
+                <input
+                    id="email"
+                    type="text"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="Enter email address"
+                />
+                <PaymentElement id="payment-element" />
+                <button disabled={isLoading || !stripe || !elements} id="submit">
+                <span id="button-text">
+                    {isLoading ? <div className="spinner" id="spinner"></div> : "Pay now"}
+                </span>
+                </button>
+                {/* Show any error or success messages */}
+                {message && <div id="payment-message">{message}</div>}
+            </form>
+        </div>
     )
 }
 export default PaymentForm
