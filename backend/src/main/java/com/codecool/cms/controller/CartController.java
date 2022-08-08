@@ -54,8 +54,10 @@ public class CartController {
     }
 
     // Empty cart
-    @DeleteMapping("empty-cart/{cartId}")
-    public void emptyCart(@PathVariable String cartId) {
+    @PostMapping("pay-empty-cart/{userId}")
+    public void payAndEmptyCart(@PathVariable UUID userId, @RequestBody List<Reservation> reservations) {
+        cartService.removeAllReservationsByUserId(userId);
+        reservationService.payForReservations(reservations, userId);
     }
 
     // Add reservation (court, practice) to cart

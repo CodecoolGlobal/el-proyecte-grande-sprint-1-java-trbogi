@@ -50,4 +50,13 @@ public class ReservationService {
         reservationRepository.deleteAllByUserId(userId);
     }
 
+    public void payForReservations(List<Reservation> reservations, UUID userId ){
+        for (Reservation reservation: reservations) {
+            if(reservation.getUser().getId() == userId){
+                reservation.setPaid(true);
+            }
+        }
+        reservationRepository.saveAll(reservations);
+    }
+
 }
