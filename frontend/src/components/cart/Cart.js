@@ -2,25 +2,20 @@ import {useContext, useEffect, useState} from "react";
 import AuthContext from "../context/AuthContext";
 import ReservationCard from "./ReservationCard";
 import { Link } from "react-router-dom";
+import ReservationsContext from "../context/ReservationsContext";
 
 const Cart = () => {
-    const [reservations, setReservations] = useState([]);
     const {user} = useContext(AuthContext);
+    const {reservationsInCart, setReservationsInCart, getReservationsInCart} = useContext(ReservationsContext);
     const [reservationIdToRemove, setReservationIdToRemove] = useState("");
 
     const totalPrice = () => {
-        const prices = reservations.map(res => res['price'])
+        const prices = reservationsInCart.map(res => res['price'])
         return prices.reduce((a, b) => parseFloat(a) + parseFloat(b), 0);
     }
 
     useEffect(() => {
-        fetch(`http://localhost:8080/api/cart/get-cart-reservations/${user['userId']}`, {
-        })
-            .then(response => response.json())
-            .then(data => {
-                console.log('Success:', data);
-                setReservations(data);
-            })
+        getReservationsInCart(user)
     }, [reservationIdToRemove]);
 
     const deleteAllReservations = () => {
@@ -35,7 +30,7 @@ const Cart = () => {
             .then(response =>{
                 if (response.ok){
                     console.log('Delete was successful');
-                    setReservations([]);
+                    setReservationsInCart([]);
                 }
             })
             .catch((error) => {
@@ -48,8 +43,8 @@ const Cart = () => {
             <div className="cards-container">
                 <div className="total">
                     <h2>YOUR CART</h2>
-                    <p>You have {reservations.length} reservation(s) in your cart.</p>
-                    {reservations.length !== 0 &&
+                    <p>You have {reservationsInCart.length} reservation(s) in your cart.</p>
+                    {reservationsInCart.length !== 0 &&
                         <>
                             <p>Total Price: <label className="total-price">{totalPrice()} HUF</label></p>
                             <div>
@@ -59,10 +54,10 @@ const Cart = () => {
                         </>
                     }
                 </div>
-                {reservations.length !== 0 &&
+                {reservationsInCart.length !== 0 &&
                     <div className="cards">
-                        {0 < reservations.length  &&
-                            reservations.map(reservation => {
+                        {0 < reservationsInCart.length  &&
+                            reservationsInCart.map(reservation => {
                                 return <ReservationCard key={reservation['id']} reservation={reservation} remove={setReservationIdToRemove}/>})}
                     </div>}
             </div>
