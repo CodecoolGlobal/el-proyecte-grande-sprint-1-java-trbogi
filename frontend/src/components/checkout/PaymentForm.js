@@ -3,10 +3,17 @@ import {
     useStripe,
     PaymentElement
 } from '@stripe/react-stripe-js'
-import {useEffect, useState} from "react";
+import {useContext, useEffect, useState} from "react";
 import '../../style/checkout.css'
+import AuthContext from "../context/AuthContext";
+import ReservationsContext from "../context/ReservationsContext";
+import {useNavigate} from "react-router-dom";
 
 const PaymentForm = () => {
+    const navigate = useNavigate();
+    const {user} = useContext(AuthContext);
+    const {reservationsInCart} = useContext(ReservationsContext);
+
     const stripe = useStripe();
     const elements = useElements();
 
@@ -45,6 +52,25 @@ const PaymentForm = () => {
         });
     }, [stripe]);
 
+    const pay = () => {
+        console.log(reservationsInCart)
+        fetch(`http://localhost:8080/api/cart/pay-empty-cart/${user['userId']}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                //TODO: 'Authentication': 'Bearer ' + authTokens['access_token']
+            },
+            body: JSON.stringify(reservationsInCart),
+        })
+            .then(response =>{
+                if (response.ok){
+                    console.log('Success: payment status changed')
+                }
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+    }
     const handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -56,27 +82,30 @@ const PaymentForm = () => {
 
         setIsLoading(true);
 
-        const { error } = await stripe.confirmPayment({
+        const result = await stripe.confirmPayment({
             elements,
-            confirmParams: {
-                // Make sure to change this to your payment completion page
-                return_url: "http://localhost:3000",
-                receipt_email: email,
-            },
+            redirect: "if_required",
+        }).then(function (result) {
+            return result
+        }).then(function (result){
+            if (result.paymentIntent){
+                pay()
+            }
+            return result
         });
 
-        // This point will only be reached if there is an immediate error when
-        // confirming the payment. Otherwise, your customer will be redirected to
-        // your `return_url`. For some payment methods like iDEAL, your customer will
-        // be redirected to an intermediate site first to authorize the payment, then
-        // redirected to the `return_url`.
-        if (error.type === "card_error" || error.type === "validation_error") {
-            setMessage(error.message);
-        } else {
-            setMessage("An unexpected error occurred.");
+        if (result.error) {
+            if (result.error.type === "card_error" || result.error.type === "validation_error") {
+                setMessage(result.error.message);
+            } else {
+                setMessage("An unexpected error occurred.");
+            }
         }
 
         setIsLoading(false);
+        if (!isLoading && !result.error){
+            navigate("/");
+        }
     };
 
     return (
