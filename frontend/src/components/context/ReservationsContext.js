@@ -6,6 +6,7 @@ export default ReservationsContext
 
 export const ReservationProvider = ({children}) => {
     const [reservations, setReservations] = useState([]);
+    const [reservationsInCartByCourt, setReservationsInCartByCourt] = useState([]);
     const [reservationsInCart, setReservationsInCart] = useState([]);
 
     const getReservations = (courtNumber, startOfWeek) => {
@@ -18,14 +19,23 @@ export const ReservationProvider = ({children}) => {
             })
     }
 
+    const getReservationsInCart = (user) => {
+        fetch(`http://localhost:8080/api/cart/get-cart-reservations/${user['userId']}`, {
+        })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Success:Reservations in cart:', data);
+                setReservationsInCart(data);
+            })
+    }
     const getReservationsInCartByCourt = (user, court) => {
         if (user){
             fetch(`http://localhost:8080/api/cart/get-cart-reservations/${user['userId']}/${court}`, {
             })
                 .then(response => response.json())
                 .then(data => {
-                    console.log('Success: Reservations in cart:', data);
-                    setReservationsInCart(data);
+                    console.log('Success: Reservations in cart by court:', data);
+                    setReservationsInCartByCourt(data);
                 })
         }
     }
@@ -53,8 +63,11 @@ export const ReservationProvider = ({children}) => {
     const contextData = {
         reservations: reservations,
         setReservations: setReservations,
+        reservationsInCartByCourt: reservationsInCartByCourt,
+        setReservationsInCartByCourt: setReservationsInCartByCourt,
         reservationsInCart: reservationsInCart,
         setReservationsInCart: setReservationsInCart,
+        getReservationsInCart: getReservationsInCart,
         getReservations: getReservations,
         getReservationsInCartByCourt: getReservationsInCartByCourt,
         removeReservationFromCart: removeReservationFromCart
