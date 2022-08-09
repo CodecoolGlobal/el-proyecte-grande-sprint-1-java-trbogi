@@ -1,5 +1,6 @@
 package com.codecool.cms.controller;
 
+import com.codecool.cms.dto.ReservationDto;
 import com.codecool.cms.model.Court;
 import com.codecool.cms.model.Reservation;
 import com.codecool.cms.service.ReservationService;
@@ -30,7 +31,7 @@ public class ReservationController {
 
     // Get reservations of the given week by court
     @GetMapping("get-reservation/{courtNumber}/{firstDayOfWeek}")
-    public List<Reservation> getReservationsOfWeekByCourt(@PathVariable Integer courtNumber, @PathVariable @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate firstDayOfWeek) {
+    public List<ReservationDto> getReservationsOfWeekByCourt(@PathVariable Integer courtNumber, @PathVariable @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate firstDayOfWeek) {
         LocalDateTime day = firstDayOfWeek.atStartOfDay();
         return reservationService.getReservationsOfWeekByCourt(courtNumber, day);
     }

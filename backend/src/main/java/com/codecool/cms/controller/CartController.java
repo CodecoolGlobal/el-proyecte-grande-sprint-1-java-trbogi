@@ -1,5 +1,6 @@
 package com.codecool.cms.controller;
 
+import com.codecool.cms.dto.ReservationDto;
 import com.codecool.cms.model.Reservation;
 import com.codecool.cms.service.CartService;
 import com.codecool.cms.service.ReservationService;
@@ -27,37 +28,21 @@ public class CartController {
 
     // Get cart content: reservations
     @GetMapping("get-cart-reservations/{userId}")
-    public List<Reservation> getReservationsFromCartByUserId(@PathVariable UUID userId) {
-        List<Object> ids = cartService.getReservationsFromCartByUserId(userId);
-        List<UUID> uuids = new ArrayList<>();
-        for (Object e : ids) {
-            String s = (String) e;
-            UUID uuid = UUID.fromString(s);
-            uuids.add(uuid);
-        }
-        return reservationService.getReservationsByIds(uuids);
+    public List<ReservationDto> getReservationsFromCartByUserId(@PathVariable UUID userId) {
+        return cartService.getReservationsFromCartByUserId(userId);
     }
 
 
     @GetMapping("get-cart-reservations/{userId}/{courtNumber}")
-    public List<Reservation> getReservationsFromCartByUserIdAndCourtNumber(@PathVariable UUID userId, @PathVariable int courtNumber) {
-        List<Object> ids = cartService.getReservationsFromCartByUserId(userId);
-        List<UUID> uuids = new ArrayList<>();
-        for (Object e : ids) {
-            String s = (String) e;
-            UUID uuid = UUID.fromString(s);
-            uuids.add(uuid);
-        }
-        return reservationService.getReservationsByIds(uuids).stream()
-                .filter(reservation -> reservation.getCourtNumber() == courtNumber)
-                .collect(Collectors.toList());
+    public List<ReservationDto> getReservationsFromCartByUserIdAndCourtNumber(@PathVariable UUID userId, @PathVariable int courtNumber) {
+        return cartService.getReservationsFromCartByUserIdAndCourtNumber(userId, courtNumber);
     }
 
     // Empty cart
     @PostMapping("pay-empty-cart/{userId}")
-    public void payAndEmptyCart(@PathVariable UUID userId, @RequestBody List<Reservation> reservations) {
+    public void payAndEmptyCart(@PathVariable UUID userId, @RequestBody Iterable<Reservation> reservations) {
+        reservationService.payForReservations((List<Reservation>) reservations);
         cartService.removeAllReservationsByUserId(userId);
-        reservationService.payForReservations(reservations, userId);
     }
 
     // Add reservation (court, practice) to cart

@@ -2,16 +2,14 @@ package com.codecool.cms.service;
 
 import com.codecool.cms.data.ReservationRepository;
 import com.codecool.cms.data.UserRepository;
+import com.codecool.cms.dto.ReservationDto;
 import com.codecool.cms.model.Reservation;
 import com.codecool.cms.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 @Service
 public class ReservationService {
@@ -26,9 +24,16 @@ public class ReservationService {
         reservationRepository.save(reservation);
     }
 
-    public List<Reservation> getReservationsOfWeekByCourt(int courtNumber, LocalDateTime startOfWeek){
+    public List<ReservationDto> getReservationsOfWeekByCourt(int courtNumber, LocalDateTime startOfWeek){
         LocalDateTime nextMonday = startOfWeek.plusWeeks(1);
-        return reservationRepository.findByCourtNumberAndStartTimeBetween(courtNumber, startOfWeek, nextMonday);
+        List<Reservation> reservations = reservationRepository.findByCourtNumberAndStartTimeBetween(courtNumber, startOfWeek, nextMonday);
+        List<ReservationDto> dtos = new ArrayList<>();
+        for (Reservation reservation:reservations
+             ) {
+            UUID userId = reservation.getUser() != null ? reservation.getUser().getId(): null;
+            dtos.add(new ReservationDto(reservation.getId(), reservation.getCourtNumber(), reservation.getStartTime(), reservation.getEndTime(), userId, reservation.getPrice(), reservation.getPaid()));
+        }
+        return dtos;
     }
 
     public Reservation createReservation(UUID userId, LocalDateTime startTime, int courtNumber){
@@ -50,11 +55,9 @@ public class ReservationService {
         reservationRepository.deleteAllByUserId(userId);
     }
 
-    public void payForReservations(List<Reservation> reservations, UUID userId ){
+    public void payForReservations(List<Reservation> reservations ){
         for (Reservation reservation: reservations) {
-            if(reservation.getUser().getId() == userId){
-                reservation.setPaid(true);
-            }
+            reservation.setPaid(true);
         }
         reservationRepository.saveAll(reservations);
     }
