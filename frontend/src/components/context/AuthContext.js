@@ -1,19 +1,22 @@
 import {createContext, useState} from 'react'
 import jwtDecode from "jwt-decode";
+import {useNavigate} from "react-router-dom";
 
 const AuthContext = createContext()
 
 export default AuthContext
 
 export const AuthProvider = ({children}) => {
-    const [user, setUser] = useState(() => localStorage.getItem("authTokens") ? jwtDecode(JSON.parse(localStorage.getItem("authTokens"))['access_token']) : null
+    const navigate = useNavigate();
+    const [user, setUser] = useState(() => sessionStorage.getItem("authTokens") ? jwtDecode(JSON.parse(sessionStorage.getItem("authTokens"))['access_token']) : null
     );
-    const [authTokens, setAuthTokens] = useState(() => localStorage.getItem("authTokens") ? JSON.parse(localStorage.getItem("authTokens")) : null);
+    const [authTokens, setAuthTokens] = useState(() => sessionStorage.getItem("authTokens") ? JSON.parse(sessionStorage.getItem("authTokens")) : null);
 
     const logout = () => {
         setAuthTokens(null);
         setUser(null);
-        localStorage.removeItem("authTokens");
+        sessionStorage.removeItem("authTokens");
+        navigate("/");
     }
 
     const login = (username, password) => {
@@ -30,7 +33,8 @@ export const AuthProvider = ({children}) => {
                 setAuthTokens(data);
                 const userData = jwtDecode(data['access_token']);
                 setUser(userData);
-                localStorage.setItem('authTokens', JSON.stringify(data))
+                sessionStorage.setItem('authTokens', JSON.stringify(data));
+                navigate("/reservation");
             })
     }
 
