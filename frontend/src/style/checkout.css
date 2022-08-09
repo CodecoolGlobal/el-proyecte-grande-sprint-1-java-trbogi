@@ -9,7 +9,7 @@
     text-transform: uppercase;
 }
 
-form {
+.checkout-container form {
     background-color: #7fc9db;
     width: 30vw;
     min-width: 500px;
