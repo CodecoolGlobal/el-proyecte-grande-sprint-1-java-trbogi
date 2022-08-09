@@ -11,7 +11,7 @@ function TimeSlot(props) {
     const slotsStartTime = props.day+ " "+  props.start;
     const isPast = moment(slotsStartTime).isBefore(moment());
     const [currentReservation, setCurrentReservation] = useState(null);
-    const {reservations, reservationsInCart, getReservationsInCartByCourt, removeReservationFromCart} = useContext(ReservationsContext);
+    const {reservations, reservationsInCartByCourt, getReservationsInCartByCourt, removeReservationFromCart, getReservationsInCart} = useContext(ReservationsContext);
 
 
     const isReserved = () => {
@@ -27,7 +27,7 @@ function TimeSlot(props) {
     }
 
     const isInCart = () => {
-        for (const reservation of reservationsInCart) {
+        for (const reservation of reservationsInCartByCourt) {
             const timeData = reservation.startTime.split(" ");
             const reservationDate = timeData[0];
             const reservationStart = timeData[1];
@@ -56,6 +56,7 @@ function TimeSlot(props) {
                 if (response.ok){
                     console.log('Success: put in cart')
                     getReservationsInCartByCourt(user,courtContext);
+                    getReservationsInCart(user);
                     response.json()
                         .then(r => setCurrentReservation(r));
                 }
@@ -66,7 +67,7 @@ function TimeSlot(props) {
     }
 
     useEffect(() =>{
-        for (const reservation of reservationsInCart) {
+        for (const reservation of reservationsInCartByCourt) {
             const timeData = reservation.startTime.split(" ");
             const reservationDate = timeData[0];
             const reservationStart = timeData[1];
