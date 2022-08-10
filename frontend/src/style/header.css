@@ -2,14 +2,13 @@
 .navbar {
     display: flex;
     justify-content: space-around;
-    margin-bottom: 27px;
+    height: 6vh;
 }
 
 .navbar .link {
-    padding: 0.5% 1%;
-    height: 100%;
+    padding-top: 1vh;
     font-family: 'Nunito Sans', sans-serif;
-    font-size: 15px;
+    font-size: 3vh;
     font-weight: bolder;
     text-decoration: none;
     text-transform: uppercase;

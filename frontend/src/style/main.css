@@ -1,7 +1,54 @@
+:root{
+    --toastify-color-success: #8bd48d !important;
+}
+
 body{
     background-color: rgba(28,162,184);
     color: azure;
     font-family: 'Nunito Sans', sans-serif;
+    margin: 0px;
+    padding: 0px;
+}
+
+.home-container{
+    z-index: -1;
+    display: block;
+    position: relative;
+    height: 94vh;
+    width: 100%;
+    overflow: hidden;
+}
+
+.home-container::after {
+    content: "";
+    background: url('../images/homebg.jpg');
+    opacity: 60%;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    position: absolute;
+    z-index: -1;
+}
+
+.home-container-content{
+    padding: 2%;
+}
+
+.home-container-content .upper{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+
+.home-container p{
+    text-transform: uppercase;
+    text-align: right;
+    font-weight: bold;
+    letter-spacing: 0.1em;
+    font-size: large;
+    line-height: 2em;
+    padding: 10px;
 }
 
 .container {
@@ -10,6 +57,7 @@ body{
     justify-content: center;
     align-items: center;
     width: 100%;
+    margin-top: 3%;
 }
 
 
@@ -180,3 +228,50 @@ body{
         transform: rotateZ(0);
     }
 }
+
+.popout {
+    font-weight: 900;
+    font-size: 80px;
+    padding-right: 80px;
+    padding-top: 80px;
+    padding-bottom: 80px;
+    padding-right: 0;
+    margin: 0;
+}
+@keyframes ani {
+    0% {
+        transform: translate3d(0, 0, 0);
+        text-shadow: 0em 0em 0 #feb934;
+        color: #0d4a5c;
+    }
+    30% {
+        transform: translate3d(0, 0, 0);
+        text-shadow: 0em 0em 0 #feb934;
+        color: #0d4a5c;
+    }
+    70% {
+        transform: translate3d(0.08em, -0.08em, 0);
+        text-shadow: -0.08em 0.08em #feb934;
+        color: #0d4a5c;
+    }
+    100% {
+        transform: translate3d(0.08em, -0.08em, 0);
+        text-shadow: -0.08em 0.08em #feb934;
+        color: #0d4a5c;
+    }
+}
+.popout span {
+    position: relative;
+    display: inline-block;
+    animation: ani 1s infinite alternate cubic-bezier(0.86, 0, 0.07, 1);
+}
+.popout span:nth-last-child(1n) {
+    animation-delay: -0.1666666667s;
+}
+.popout span:nth-last-child(2n) {
+    animation-delay: -0.3333333333s;
+}
+.popout span:nth-last-child(3n) {
+    animation-delay: -0.5s;
+}
+
