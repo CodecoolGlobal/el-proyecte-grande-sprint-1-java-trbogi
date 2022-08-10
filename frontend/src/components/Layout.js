@@ -1,6 +1,6 @@
 import React from 'react';
 import Header from './Header';
-import Footer from './Footer';
+import {ToastContainer, toast} from "react-toastify";
 
 const Layout = (props) => {
     
@@ -8,6 +8,7 @@ const Layout = (props) => {
         <div>
             <Header></Header>
             {props.children}
+            <ToastContainer closeButton={false}/>
         </div>
     )
 }

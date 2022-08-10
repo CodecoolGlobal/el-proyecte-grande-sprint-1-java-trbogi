@@ -1,4 +1,5 @@
 import {createContext, useState} from 'react'
+import {toast} from "react-toastify";
 
 const ReservationsContext = createContext()
 
@@ -8,6 +9,18 @@ export const ReservationProvider = ({children}) => {
     const [reservations, setReservations] = useState([]);
     const [reservationsInCartByCourt, setReservationsInCartByCourt] = useState([]);
     const [reservationsInCart, setReservationsInCart] = useState([]);
+
+    const notifyRemoveReservation = () => {
+        toast.info('Reservation has been removed from your cart!', {
+            position: "bottom-center",
+            autoClose: 1200,
+            hideProgressBar: true,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+        });
+    }
 
     const getReservations = (courtNumber, startOfWeek) => {
         fetch(`http://localhost:8080/api/reservation/get-reservation/${courtNumber}/${startOfWeek}`, {
@@ -53,6 +66,7 @@ export const ReservationProvider = ({children}) => {
                 if (response.ok){
                     console.log('Delete was successful');
                     getReservationsInCartByCourt(user, court);
+                    notifyRemoveReservation();
                 }
             })
             .catch((error) => {

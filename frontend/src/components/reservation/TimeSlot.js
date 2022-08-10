@@ -4,6 +4,8 @@ import moment from "moment";
 import {CourtContext} from "./TimeTable";
 import AuthContext from "../context/AuthContext";
 import ReservationsContext from "../context/ReservationsContext";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function TimeSlot(props) {
     const {authTokens, user} = useContext(AuthContext);
@@ -13,6 +15,17 @@ function TimeSlot(props) {
     const [currentReservation, setCurrentReservation] = useState(null);
     const {reservations, reservationsInCartByCourt, getReservationsInCartByCourt, removeReservationFromCart, getReservationsInCart} = useContext(ReservationsContext);
 
+    const notifyAddReservation = () => {
+        toast.success('Reservation has been added to your cart!', {
+            position: "bottom-center",
+            autoClose: 1200,
+            hideProgressBar: true,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+        });
+    }
 
     const isReserved = () => {
         for (const reservation of reservations) {
@@ -58,7 +71,8 @@ function TimeSlot(props) {
                     getReservationsInCartByCourt(user,courtContext);
                     getReservationsInCart(user);
                     response.json()
-                        .then(r => setCurrentReservation(r));
+                        .then(reservationId => setCurrentReservation(reservationId));
+                    notifyAddReservation();
                 }
             })
             .catch((error) => {
@@ -81,12 +95,12 @@ function TimeSlot(props) {
     if (isReserved()){
         return(<p style={{backgroundColor: "#fcb7b4"}}>{props.start}</p>)
     }else if(isInCart()) {
-        return (<p style={{backgroundColor: "#CED9FF"}} onClick={() => removeReservationFromCart(currentReservation, user, courtContext)}>{props.start} <br/>
+        return (<p style={{backgroundColor: "#CED9FF", cursor: "pointer"}} onClick={() => removeReservationFromCart(currentReservation, user, courtContext)}>{props.start} <br/>
             <BsBagDash/></p>)
     }else if(isPast){
             return (<p style={{backgroundColor: "rgb(211, 211, 211, 0.8)"}}/>)
     }else{
-        return(<p style={{backgroundColor: "aliceblue"}} onClick={addReservationToCart}>{props.start} <br/>
+        return(<p style={{backgroundColor: "aliceblue", cursor: "pointer"}} onClick={addReservationToCart}>{props.start} <br/>
             <BsBagPlusFill className="addToCartIcon"/></p>)
     }
 }
