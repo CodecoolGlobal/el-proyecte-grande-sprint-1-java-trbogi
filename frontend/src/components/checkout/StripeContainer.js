@@ -6,7 +6,7 @@ import ReservationsContext from "../context/ReservationsContext";
 
 const PUBLIC_KEY = "pk_test_51LUUebJLOuDYsmQO10IoM7xAuJZUiZje38oOtDvzwXkOvMwjgUkVt9oPW78mJgsre4vfspXF7ZGrAlvZt7HuXxD100CZs2cXUe";
 
-const stripeTestPromise = loadStripe(PUBLIC_KEY);
+const stripeTestPromise = loadStripe(PUBLIC_KEY,{locale: 'us'});
 
 const StripeContainer = () => {
     const {reservationsInCart} = useContext(ReservationsContext)
