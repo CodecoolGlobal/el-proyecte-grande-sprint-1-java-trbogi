@@ -1,4 +1,4 @@
-import '../../style/reservation-card.css'
+import '../../style/cart.css'
 import {TbCalendarStats} from 'react-icons/tb'
 import {MdOutlineDeleteForever} from 'react-icons/md'
 
