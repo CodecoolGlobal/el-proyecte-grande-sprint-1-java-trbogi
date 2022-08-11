@@ -57,7 +57,7 @@ public class CartService {
         List<ReservationDto> dtos = new ArrayList<>();
         for (Reservation reservation:reservations
         ) {
-            dtos.add(new ReservationDto(reservation.getId(), reservation.getCourtNumber(), reservation.getStartTime(), reservation.getEndTime(), reservation.getUser().getId(), reservation.getPrice(), reservation.getPaid()));
+            dtos.add(new ReservationDto(reservation.getId(), reservation.getCourtNumber(), reservation.getStartTime(), reservation.getEndTime(), userId, reservation.getPrice(), reservation.getPaid()));
         }
         return dtos;
 
