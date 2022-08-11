@@ -10,8 +10,8 @@ import java.util.UUID;
 
 @Entity
 public class Reservation {
-    private final BigDecimal DEFAULT_PRICE = new BigDecimal(4000);
-    private final long DEFAULT_INTERVAL_IN_HOURS = 2;
+    public static final BigDecimal DEFAULT_PRICE = new BigDecimal(4000);
+    private static final long DEFAULT_INTERVAL_IN_HOURS = 2;
 
     // Field(s)
     @Id
