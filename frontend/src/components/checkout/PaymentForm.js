@@ -8,6 +8,7 @@ import '../../style/checkout.css'
 import AuthContext from "../context/AuthContext";
 import ReservationsContext from "../context/ReservationsContext";
 import {useNavigate} from "react-router-dom";
+import {toast} from "react-toastify";
 
 const PaymentForm = () => {
     const navigate = useNavigate();
@@ -17,10 +18,20 @@ const PaymentForm = () => {
     const stripe = useStripe();
     const elements = useElements();
 
-    const [email, setEmail] = useState('');
     const [message, setMessage] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
 
+    const notifySuccessfulPayment = () => {
+        toast.success('Successful payment!', {
+            position: "top-right",
+            autoClose: 1200,
+            hideProgressBar: true,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+        });
+    }
     useEffect(() => {
         if (!stripe) {
             return;
@@ -103,8 +114,10 @@ const PaymentForm = () => {
         }
 
         setIsLoading(false);
+
         if (!isLoading && !result.error){
-            navigate("/");
+            notifySuccessfulPayment();
+            navigate("/reservation");
         }
     };
 
@@ -112,13 +125,6 @@ const PaymentForm = () => {
         <div className="checkout-container">
             <h1>Checkout</h1>
             <form id="payment-form" onSubmit={handleSubmit}>
-                <input
-                    id="email"
-                    type="text"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    placeholder="Enter email address"
-                />
                 <PaymentElement id="payment-element" />
                 <button disabled={isLoading || !stripe || !elements} id="submit">
                 <span id="button-text">
