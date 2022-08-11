@@ -10,7 +10,7 @@ const ReservationCard = ({reservation, remove}) => {
     }
 
     const removeReservationFromDatabase = (reservationId) => {
-        fetch(`http://localhost:8080/api/cart/delete-reservation/${reservationId}`, {
+        fetch(`/api/cart/delete-reservation/${reservationId}`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',

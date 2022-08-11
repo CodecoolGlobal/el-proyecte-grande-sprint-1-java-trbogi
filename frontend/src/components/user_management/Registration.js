@@ -14,7 +14,7 @@ const Register = (props) => {
 
     const submitRegistration = async (e) => {
         e.preventDefault();
-        await fetch("http://localhost:8080/api/user/create-user", {
+        await fetch("/api/user/create-user", {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({

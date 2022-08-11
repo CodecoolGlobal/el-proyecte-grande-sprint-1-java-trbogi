@@ -14,7 +14,7 @@ const StripeContainer = () => {
 
     useEffect(() => {
         // Create PaymentIntent as soon as the page loads
-        fetch("http://localhost:8080/api/payment/create-payment-intent", {
+        fetch("/api/payment/create-payment-intent", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ items: reservationsInCart }),

@@ -19,7 +19,7 @@ const Cart = () => {
     }, [reservationIdToRemove]);
 
     const deleteAllReservations = () => {
-        fetch(`http://localhost:8080/api/cart/delete-all-court-reservation/${user['userId']}`, {
+        fetch(`/api/cart/delete-all-court-reservation/${user['userId']}`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',

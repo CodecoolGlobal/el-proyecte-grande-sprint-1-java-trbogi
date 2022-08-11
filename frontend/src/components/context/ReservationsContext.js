@@ -23,7 +23,7 @@ export const ReservationProvider = ({children}) => {
     }
 
     const getReservations = (courtNumber, startOfWeek) => {
-        fetch(`http://localhost:8080/api/reservation/get-reservation/${courtNumber}/${startOfWeek}`, {
+        fetch(`/api/reservation/get-reservation/${courtNumber}/${startOfWeek}`, {
         })
             .then(response => response.json())
             .then(data => {
@@ -33,7 +33,7 @@ export const ReservationProvider = ({children}) => {
     }
 
     const getReservationsInCart = (user) => {
-        fetch(`http://localhost:8080/api/cart/get-cart-reservations/${user['userId']}`, {
+        fetch(`/api/cart/get-cart-reservations/${user['userId']}`, {
         })
             .then(response => response.json())
             .then(data => {
@@ -43,7 +43,7 @@ export const ReservationProvider = ({children}) => {
     }
     const getReservationsInCartByCourt = (user, court) => {
         if (user){
-            fetch(`http://localhost:8080/api/cart/get-cart-reservations/${user['userId']}/${court}`, {
+            fetch(`/api/cart/get-cart-reservations/${user['userId']}/${court}`, {
             })
                 .then(response => response.json())
                 .then(data => {
@@ -54,7 +54,7 @@ export const ReservationProvider = ({children}) => {
     }
 
     const removeReservationFromCart = (currentReservation, user, court) => {
-        fetch(`http://localhost:8080/api/cart/delete-reservation/${currentReservation}`, {
+        fetch(`/api/cart/delete-reservation/${currentReservation}`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',

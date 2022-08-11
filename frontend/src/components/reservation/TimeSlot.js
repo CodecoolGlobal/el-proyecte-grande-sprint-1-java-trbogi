@@ -57,7 +57,7 @@ function TimeSlot(props) {
             return;
         }
         const reservationData = { "startTime": slotsStartTime, "userId": user['userId'], "courtNumber": courtContext };
-        fetch('http://localhost:8080/api/cart/add-reservation', {
+        fetch('/api/cart/add-reservation', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

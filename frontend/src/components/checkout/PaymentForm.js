@@ -65,7 +65,7 @@ const PaymentForm = () => {
 
     const pay = () => {
         console.log(reservationsInCart)
-        fetch(`http://localhost:8080/api/cart/pay-empty-cart/${user['userId']}`, {
+        fetch(`/api/cart/pay-empty-cart/${user['userId']}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
