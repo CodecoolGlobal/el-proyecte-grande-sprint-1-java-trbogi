@@ -80,8 +80,11 @@
 }
 
 #modal-content{
-    flex: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     height: 80%;
+    margin-top: 5%;
     padding-top: 20pt;
     padding-right: 20pt;
     padding-left: 20pt;
@@ -93,8 +96,10 @@
     display: inline-block;
     color: #282c34;
     width: 100%;
+    min-height: 30px;
     height: 50px;
     margin-top: 8%;
+    margin-bottom: 5%;
     padding: 0 20px;
     background: #fff;
     border-radius: 5px;
