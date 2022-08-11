@@ -5,7 +5,7 @@ const Home = () => {
     return (
         <div className="home-container">
             <div className="home-container-content">
-                <div className="upper">
+                <div className="top">
                     <div className="popout">
                         <span>B</span>
                         <span>E</span>
@@ -25,12 +25,13 @@ const Home = () => {
                         <span>!</span>
                     </div>
                 </div>
-
-                <p>
-                    Our sport club has 4 professional beach volleyball courts right next to Lake Balaton. <br/>
-                    Play volleyball with your friends. <br/>
-                    Book your court now!
-                </p>
+                <div className="bottom">
+                    <p>
+                        Our sport club has 4 professional beach volleyball courts right next to Lake Balaton.
+                        Play volleyball with your friends.
+                        Book your court now!
+                    </p>
+                </div>
             </div>
         </div>
     )

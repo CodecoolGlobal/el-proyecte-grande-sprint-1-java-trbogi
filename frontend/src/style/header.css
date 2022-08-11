@@ -2,11 +2,11 @@
 .navbar {
     display: flex;
     justify-content: space-between;
-    height: 6vh;
+    height: 50px;
 }
 
 .navbar .link {
-    padding-top: 1vh;
+    padding-top: 10px;
     font-family: 'Nunito Sans', sans-serif;
     font-size: 18px;
     font-weight: bold;
@@ -24,7 +24,7 @@
 }
 
 .navbar .username-with-icon{
-    padding-top: 1vh;
+    padding-top: 10px;
     padding-right: 1vw;
     font-family: 'Nunito Sans', sans-serif;
     font-size: 18px;
