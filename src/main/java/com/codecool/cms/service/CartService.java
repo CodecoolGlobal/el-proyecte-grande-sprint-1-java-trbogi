@@ -8,7 +8,6 @@ import com.codecool.cms.model.Reservation;
 import com.codecool.cms.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;

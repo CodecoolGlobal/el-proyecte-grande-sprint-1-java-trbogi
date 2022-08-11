@@ -1,6 +1,5 @@
 package com.codecool.cms.dto;
 
-import com.codecool.cms.model.User;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
