@@ -5,6 +5,8 @@ import AuthContext from "./context/AuthContext";
 import Login from './user_management/Login';
 import Registration from './user_management/Registration';
 import '../style/header.css';
+import {FaUserCircle} from 'react-icons/fa';
+import {MdSportsVolleyball} from 'react-icons/md'
 
 
 const Header = () => {
@@ -14,14 +16,13 @@ const Header = () => {
 
     return (
         <div className="navbar">
-            <Link className="link" to="/">Home</Link>
-            <Link className="link" to="/shop">Shop</Link>
+            <Link className="logo" to="/"><MdSportsVolleyball size={30} /></Link>
             <Link className="link" to="/reservation">Reservation</Link>
             {user ?
                 (<>
-                    <span>Welcome {user['sub']}!</span>
                     <Link className="link" to="/cart">Cart</Link>
                     <span className="link" onClick={() => logout()}>Logout</span>
+                    <span className="username-with-icon"><FaUserCircle size={30}/> {user['sub']}</span>
                 </>) :
                 (<>
                     <span className="link" onClick={() => setRegistrationModalDialogContent(<Registration closeDialog={() => setRegistrationModalDialogContent("")}></Registration>)}>Registration</span>
