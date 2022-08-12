@@ -45,7 +45,7 @@ const Register = (props) => {
                                 <label><FaUserAlt/> Username</label>
                             </div>
                             <div className="input-container">
-                                <input type="email" required=" " onChange={event => setEmail(event.target.value)} />
+                                <input type="text" required=" " onChange={event => setEmail(event.target.value)} />
                                 <label><FaEnvelope/> E-mail</label>
                             </div>
                             <div className="input-container">

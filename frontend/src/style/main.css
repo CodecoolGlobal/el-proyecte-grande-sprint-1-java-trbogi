@@ -16,6 +16,8 @@ body{
     justify-content: center;
     align-items: center;
     width: 100%;
+    top: 40px;
+    bottom: 0;
     margin-top: 3%;
 }
 
@@ -29,6 +31,7 @@ body{
     border-radius: 0.3%;
     padding: 1%;
     width: 80vw;
+    min-width: fit-content;
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
 
@@ -193,7 +196,7 @@ body{
     z-index: -1;
     display: block;
     position: absolute;
-    top: 50px;
+    top: 40px;
     bottom: 0;
     overflow: hidden;
     width: 100%;
@@ -202,7 +205,7 @@ body{
 .home-container::after {
     content: "";
     background-size: cover;
-    background: url('../images/homebg.jpg') no-repeat;
+    background: url('../images/homebg.jpg') repeat;
     opacity: 60%;
     top: 0;
     left: 0;

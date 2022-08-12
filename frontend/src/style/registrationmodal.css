@@ -44,14 +44,13 @@
 }
 
 #registration-modal-dialog {
-    display: flex;
-    flex-direction: column;
     position: absolute;
     z-index: 1;
     width: 20%;
-    height: 70%;
+    min-height: 60%;
+    max-height: 500px;
+
     top: 15%;
-    bottom: 15%;
     left: 40%;
     right: 40%;
     background-image: url("../../public/loginback.png");
