@@ -92,13 +92,13 @@ function TimeSlot(props) {
         }
     )
 
-    if (isReserved()){
+    if(isPast){
+        return (<p style={{backgroundColor: "rgb(211, 211, 211, 0.8)"}}/>)
+    }else if (isReserved()){
         return(<p style={{backgroundColor: "#fcb7b4"}}>{props.start}</p>)
     }else if(isInCart()) {
         return (<p style={{backgroundColor: "#CED9FF", cursor: "pointer"}} onClick={() => removeReservationFromCart(currentReservation, user, courtContext)}>{props.start} <br/>
             <BsBagDash/></p>)
-    }else if(isPast){
-            return (<p style={{backgroundColor: "rgb(211, 211, 211, 0.8)"}}/>)
     }else{
         return(<p style={{backgroundColor: "aliceblue", cursor: "pointer"}} onClick={addReservationToCart}>{props.start} <br/>
             <BsBagPlusFill className="addToCartIcon"/></p>)
